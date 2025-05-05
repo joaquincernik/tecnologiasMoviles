@@ -16,7 +16,13 @@ import com.undef.manosLocalesCernikGaribaldi.ui.theme.ManosLocalesTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        setContent {
+            ManosLocalesTheme {
+                FirstText(name = "Joaquin")
+            }
+        }
+
+       /* enableEdgeToEdge()
         setContent {
             ManosLocalesTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -26,8 +32,20 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             }
-        }
+        }*/
     }
+}
+
+@Composable
+fun FirstText(name: String){
+    Text(
+        text = "Hola $name"
+    )
+}
+@Composable
+@Preview
+fun FirstTextPreview(){
+    FirstText("Joaquin")
 }
 
 @Composable
