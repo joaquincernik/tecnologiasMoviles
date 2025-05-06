@@ -21,7 +21,7 @@ class LoginActivity : ComponentActivity() {
             ManosLocalesTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting2(
-                        name = "joaquin",
+                        name = "papa",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
