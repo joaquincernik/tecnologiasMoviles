@@ -26,11 +26,11 @@ El objetivo es desarrollar una aplicación móvil utilizando **Kotlin** para la 
 
 ---
 
-## Funcionalidades: El proyecto está basado en las consignas en "Enunciado Práctico Integrador 2025.pdf"
+## Funcionalidades: 
+El proyecto está basado en las consignas en "Enunciado Práctico Integrador 2025.pdf"
 
 
 ## Instalación
 
 1. Clona este repositorio:
-   ```bash
-https://github.com/joaquincernik/tecnologiasMoviles.git
+   ```bash https://github.com/joaquincernik/tecnologiasMoviles.git
