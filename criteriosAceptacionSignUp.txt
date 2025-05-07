@@ -1,0 +1,7 @@
+--> si el usuario ingresa una provincia no existente debe avisar, sino tildar 
+--> si el usuario ya se encuentra registrado debe avisar, sino tildar 
+--> si no tiene forma de mail entonces avisar. por ejemplo bruno@gmail.com esta bien pero solo bruno esta mal
+--> si el mail ya se encuentra registrado debe avisar, sino tildar 
+--> la contraseña debe tener al menos 8 caracteres y debe incluir mayúsculas, números y símbolos, si esta bien tildar sino avisar
+--> el usuario debe poder volver a la pantalla anterior.
+--> no te podes registrar si todos los campos no estan check
