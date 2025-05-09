@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.databinding.FragmentBienvenidoBinding
-import com.undef.manosLocalesCernikGaribaldi.databinding.FragmentSignUpBinding
+import android.content.Intent
 
 
 class BienvenidoFragment : Fragment() {
@@ -26,6 +26,12 @@ class BienvenidoFragment : Fragment() {
 
         binding.arrowbacksignup.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.buttonIrAPantallaPrincipal.setOnClickListener {
+            val intent = Intent(requireContext(), PantallaPrincipalActivity::class.java)
+            startActivity(intent)
+
         }
     }
 
