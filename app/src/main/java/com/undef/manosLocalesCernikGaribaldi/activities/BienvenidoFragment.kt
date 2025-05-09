@@ -12,6 +12,7 @@ import android.content.Intent
 
 class BienvenidoFragment : Fragment() {
     private lateinit var binding: FragmentBienvenidoBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,10 +26,12 @@ class BienvenidoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.arrowbacksignup.setOnClickListener {
+            //voy al anterior de la pila de fragments
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
         binding.buttonIrAPantallaPrincipal.setOnClickListener {
+            //vamos a la siguiente activity que es la pantalla principal
             val intent = Intent(requireContext(), PantallaPrincipalActivity::class.java)
             startActivity(intent)
 
