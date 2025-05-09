@@ -1,14 +1,337 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SignUpFragment">
+    tools:context=".activities.SignUpActivity"
+    android:padding="22dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="800dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/arrowbacksignup"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/arrow_back"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toTopOf="@id/signupbar"
+            android:layout_marginBottom="20dp"
+            />
+
+        <ImageView
+            android:id="@+id/signupbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lineasignup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf= "@id/registro_de_usuario"
+            android:layout_marginBottom="60dp"
+            />
+
+        <TextView
+            android:id="@+id/registro_de_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratlight"
+            android:text="Registro de Usuario"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="120dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- campo usuario -->
+        <EditText
+            android:id="@+id/input_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/rounder_corner_input"
+            android:fontFamily="@font/montserratlight"
+            android:hint="Usuario"
+            android:inputType="text"
+            android:paddingHorizontal="15dp"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/registro_de_usuario"
+            tools:layout_editor_absoluteX="33dp" />
+
+        <ImageView
+            android:id="@+id/status_usuario_check"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@android:color/transparent"
+            android:elevation="4dp"
+            android:src="@drawable/check"
+            app:layout_constraintTop_toBottomOf="@id/registro_de_usuario"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/status_usuario_error"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@android:color/transparent"
+            android:elevation="4dp"
+            android:src="@drawable/error"
+            app:layout_constraintTop_toBottomOf="@id/registro_de_usuario"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/texto_error_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratlight"
+            android:text="Ingrese usuario correcto"
+            android:textColor="#FF0000"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="2dp"
+            app:layout_constraintTop_toBottomOf="@id/input_usuario"
+            android:visibility="gone"
+
+            />
+
+
+        <!-- campo mail -->
+        <EditText
+            android:id="@+id/input_mail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:hint="Mail"
+            android:fontFamily="@font/montserratlight"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/rounder_corner_input"
+            app:layout_constraintTop_toBottomOf="@id/input_usuario"
+            android:textSize="12sp"
+            android:paddingHorizontal="15dp" />
+
+        <ImageView
+            android:id="@+id/status_mail_check"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:elevation="4dp"
+            android:src="@drawable/check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_usuario"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/status_mail_error"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:elevation="4dp"
+            android:src="@drawable/error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_usuario"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/texto_error_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratlight"
+            android:text="Error, ingrese un correo válido o uno que ya no se encuentre registrado"
+            android:textColor="#FF0000"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/input_mail"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="2dp"
+            android:visibility="gone" />
+
+
+        <!-- campo contraseña -->
+        <EditText
+            android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:hint="Contraseña"
+            android:fontFamily="@font/montserratlight"
+            android:inputType="textPassword"
+            android:background="@drawable/rounder_corner_input"
+            app:layout_constraintTop_toBottomOf="@id/input_mail"
+            android:textSize="12sp"
+            android:paddingHorizontal="15dp"/>
+
+        <ImageView
+            android:id="@+id/status_password_check"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:elevation="4dp"
+            android:src="@drawable/check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_mail"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/status_password_error"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:elevation="4dp"
+            android:src="@drawable/error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_mail"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/texto_error_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratlight"
+            android:text="La contraseña debe contener al menos 8 digitos, números, caracteres y caracteres especiales"
+            android:textColor="#FF0000"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/input_password"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="2dp"
+            app:layout_constraintBottom_toTopOf="@id/input_telefono"
+            android:visibility="gone"/>
+
+        <!-- campo telefono -->
+
+        <EditText
+            android:id="@+id/input_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:hint="Teléfono"
+            android:fontFamily="@font/montserratlight"
+            android:inputType="phone"
+            android:background="@drawable/rounder_corner_input"
+            app:layout_constraintTop_toBottomOf="@id/input_password"
+            android:textSize="12sp"
+            android:paddingHorizontal="15dp" />
+
+        <!-- campo provincia -->
+
+        <AutoCompleteTextView
+            android:id="@+id/autoProvincia"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Seleccioná tu provincia"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:background="@drawable/rounder_corner_input"
+            android:fontFamily="@font/montserratlight"
+            android:paddingHorizontal="15dp"
+            app:layout_constraintTop_toBottomOf="@id/input_telefono"
+            android:layout_marginTop="30dp"
+            />
+
+        <ImageView
+            android:id="@+id/status_provincia_check"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:elevation="4dp"
+            android:src="@drawable/check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_telefono"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/status_provincia_error"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:elevation="4dp"
+            android:src="@drawable/error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_telefono"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/texto_error_provincia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratlight"
+            android:text="Seleccione una provincia correcta"
+            android:textColor="#FF0000"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="2dp"
+            app:layout_constraintTop_toBottomOf="@id/autoProvincia"
+            android:visibility="gone"
+            />
+
+
+        <!-- campo ciudad -->
+
+        <EditText
+            android:id="@+id/input_ciudad"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:hint="Ciudad"
+            android:fontFamily="@font/montserratlight"
+            android:inputType="text"
+            android:background="@drawable/rounder_corner_input"
+            app:layout_constraintTop_toBottomOf="@id/autoProvincia"
+            android:textSize="12sp"
+            android:paddingHorizontal="15dp" />
+
+
+        <!-- Registrarme -->
+
+        <Button
+            android:id="@+id/buttonRegistrarme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Registrarme"
+            android:background="@drawable/background_gradient_button"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@+id/input_ciudad"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="80dp"
+            android:fontFamily="@font/montserratmedium"
+            android:textAllCaps="false"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

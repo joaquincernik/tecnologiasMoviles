@@ -6,16 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.undef.manosLocalesCernikGaribaldi.R
+import com.undef.manosLocalesCernikGaribaldi.databinding.FragmentBienvenidoBinding
+import com.undef.manosLocalesCernikGaribaldi.databinding.FragmentSignUpBinding
 
 
 class BienvenidoFragment : Fragment() {
-
+    private lateinit var binding: FragmentBienvenidoBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bienvenido, container, false)
+        binding = FragmentBienvenidoBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.arrowbacksignup.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
 

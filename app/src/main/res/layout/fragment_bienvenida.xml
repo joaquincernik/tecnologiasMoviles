@@ -53,21 +53,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- TERMINAR CON ESTO -->
     <TextView
-        android:id="@+id/ofrecemos"
+        android:id="@+id/parrafo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ofrecemos una aplicación para descubrir, seguir y contactar a productores y emprendedores locales."
+        android:text="Ofrecemos una aplicación para descubrir, seguir y contactar a productores y emprendedores locales. \n\n Fomentamos el consumo regional, el contacto directo y la promoción de productos auténticos. "
         android:fontFamily="@font/montserratlight"
-        android:textColor="#000000"/>
-    <TextView
-        android:id="@+id/fomentamos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fomentamos el consumo regional, el contacto directo y la promoción de productos auténticos."
-        android:fontFamily="@font/montserratlight"
-        android:textColor="#000000"/>
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/manosLocales"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:lineSpacingExtra="8dp"
+        android:textSize="17dp"/>
 
     <Button
         android:id="@+id/buttonCompletarTusDatos"
@@ -78,8 +77,9 @@
         android:text="Completa tus datos"
         android:background="@drawable/background_gradient_button"
         android:textColor="@android:color/white"
-        android:layout_marginTop="80dp"
-        android:fontFamily="@font/montserratmedium"/>
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/montserratmedium"
+        app:layout_constraintTop_toBottomOf="@id/parrafo"/>
 
 
 
