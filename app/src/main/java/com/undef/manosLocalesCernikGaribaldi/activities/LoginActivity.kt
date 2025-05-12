@@ -1,6 +1,8 @@
 package com.undef.manosLocalesCernikGaribaldi.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -11,37 +13,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.undef.manosLocalesCernikGaribaldi.R
+import com.undef.manosLocalesCernikGaribaldi.databinding.ActivityLoginBinding
 import com.undef.manosLocalesCernikGaribaldi.ui.theme.ManosLocalesTheme
 
 class LoginActivity : ComponentActivity() {
+
+    lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ManosLocalesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting2(
-                        name = "papa",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.goRegister.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
         }
-    }
-}
-
-@Composable
-fun Greeting2(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview2() {
-    ManosLocalesTheme {
-        Greeting2("Joaquuuin")
+        //binding = ActivityLoginBinding.inflate(layoutInflater)
+        //setContentView(binding.root)
     }
 }
