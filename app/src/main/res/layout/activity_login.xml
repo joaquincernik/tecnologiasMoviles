@@ -44,7 +44,7 @@
         android:textSize="12sp"/>
     
     <TextView
-        android:id="@+id/forgot_password"
+        android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Olvide mi password"
@@ -52,7 +52,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/montserratlightitalic"
-        android:textColor="@color/celeste"/>
+        android:textColor="@color/celeste"
+        android:clickable="true"
+        />
 
     <Button
         android:id="@+id/buttonIniciarSesion"
@@ -61,7 +63,7 @@
         android:text="Iniciar sesión"
         android:background="@drawable/background_gradient_button"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@+id/forgot_password"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="50dp"

@@ -31,6 +31,13 @@ class LoginActivity : ComponentActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+
+        binding.forgotPassword.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
+
         //binding = ActivityLoginBinding.inflate(layoutInflater)
         //setContentView(binding.root)
     }
