@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.BienvenidaFragment"
-    android:padding="22dp">
+    android:padding="24dp">
 
     <ImageButton
         android:id="@+id/arrowbacksignup"
@@ -15,7 +15,6 @@
         android:src="@drawable/arrow_back"
         android:background="@android:color/transparent"
         android:elevation="4dp"
-        android:layout_marginTop="60dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@id/barra_registro"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +38,7 @@
         android:text="Te damos la bienvenida!"
         android:fontFamily="@font/montserratlight"
         android:textColor="#4ED7F1"
-        android:textSize="25dp"
+        android:textSize="20dp"
         app:layout_constraintTop_toBottomOf="@+id/barra_registro"
         android:layout_marginTop="100dp"/>
 
@@ -63,22 +62,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/manosLocales"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:lineSpacingExtra="8dp"
-        android:textSize="17dp"/>
+        android:textSize="14dp"
+        android:paddingHorizontal="10dp"
+        />
 
     <Button
         android:id="@+id/buttonCompletarTusDatos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Completa tus datos"
         android:background="@drawable/background_gradient_button"
         android:textColor="@android:color/white"
-        android:layout_marginTop="150dp"
-        android:fontFamily="@font/montserratmedium"
+        android:textAllCaps="false"
+        android:fontFamily="@font/montserratsemibold"
         app:layout_constraintTop_toBottomOf="@id/parrafo"/>
 
 

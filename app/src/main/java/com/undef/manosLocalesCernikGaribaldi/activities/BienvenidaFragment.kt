@@ -24,6 +24,7 @@ class BienvenidaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         binding.buttonCompletarTusDatos.setOnClickListener {
 
             // Realiza la transacción para navegar a otro fragmento
