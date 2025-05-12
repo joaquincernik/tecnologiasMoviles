@@ -1,4 +1,5 @@
 package com.undef.manosLocalesCernikGaribaldi.activities
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,6 +26,11 @@ class BienvenidaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
+        binding.arrowbacksignup.setOnClickListener {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
         binding.buttonCompletarTusDatos.setOnClickListener {
 
             // Realiza la transacción para navegar a otro fragmento
