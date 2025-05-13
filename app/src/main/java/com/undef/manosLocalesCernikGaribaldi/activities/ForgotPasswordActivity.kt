@@ -1,7 +1,7 @@
 package com.undef.manosLocalesCernikGaribaldi.activities
 
 
-import android.R.attr.text
+import android.app.Activity
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import android.os.Bundle
@@ -42,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -51,6 +52,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -62,24 +64,48 @@ class ForgotPasswordActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ViewContainer()
+            AppNavigation()
         }
     }
 }
 
-@Preview
 @Composable
-fun ViewContainer() {
+fun AppNavigation() {
+    val navController = rememberNavController()
+    //aca swapeamos entre los fragmentes de forgot password
+    NavHost(navController, startDestination = "paso1") {
+        composable("paso1") { ViewContainer(navController) }
+        composable("paso2") { Paso2() }
+    }
+}
+
+@Composable
+fun ViewContainer(navController: NavHostController) {
     Scaffold(
-        topBar = { TopBar() }
+        topBar = { TopBar(navController) }
     ) { innerPadding ->
-        Content(modifier = Modifier.padding(innerPadding))
+        Content(modifier = Modifier.padding(innerPadding), navController)
+    }
+}
+
+@Composable
+fun Paso2() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text("¡Llegaste a la pantalla 2!", fontSize = 20.sp)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar() {
+fun TopBar(navController: NavHostController) {
+
+    //como hayq ue volver a otra avtivity se hace esto
+    val context = LocalContext.current
+    val activity = context as? Activity
+
     CenterAlignedTopAppBar(
         title = {
             Image(
@@ -89,7 +115,7 @@ fun TopBar() {
             )
         },
         navigationIcon = {
-            IconButton(onClick = { /* Acción de volver o abrir menú */ }) {
+            IconButton(onClick = {  activity?.finish() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_arrow_back_24),
                     contentDescription = "Volver",
@@ -105,7 +131,7 @@ fun TopBar() {
 }
 
 @Composable
-fun Content(modifier: Modifier) {
+fun Content(modifier: Modifier, navController: NavHostController) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -132,7 +158,9 @@ fun Content(modifier: Modifier) {
         Spacer(modifier = Modifier.height(24.dp))
         Input()
         Spacer(modifier = Modifier.height(24.dp))
-        GradientButton("Enviar codigo") { }
+        GradientButton("Enviar codigo") {
+            navController.navigate("paso2")
+        }
     }
 
 }
@@ -145,7 +173,7 @@ fun Input() {
         value = text,
         onValueChange = { text = it },
         label = { Text("Ingresa tu mail", fontFamily = FontMontserratRegular) },
-        
+
         modifier = Modifier
             .fillMaxWidth()
             .padding(24.dp),
@@ -183,7 +211,11 @@ fun GradientButton(
             fontFamily = FontMontserratSemiBold
         )
     }
-}//import de la fuente
+}
+
+
+//import de la fuente
+
 val FontMontserratSemiBold = FontFamily(
     Font(R.font.montserratsemibold) // usa el nombre exacto del archivo .ttf (sin extensión en el recurso)
 )
