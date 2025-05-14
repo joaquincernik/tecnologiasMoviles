@@ -13,7 +13,7 @@
         android:theme="@style/Theme.ManosLocales"
         tools:targetApi="31">
         <activity
-            android:name=".activities.ForgotPasswordActivity"
+            android:name=".activities.ForgotPassword.ForgotPasswordActivity"
             android:exported="false"
             android:label="@string/title_activity_forgot_password"
             android:theme="@style/Theme.ManosLocales" />

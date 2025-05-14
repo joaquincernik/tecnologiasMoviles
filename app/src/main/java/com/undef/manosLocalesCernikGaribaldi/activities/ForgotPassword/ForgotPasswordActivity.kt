@@ -1,16 +1,13 @@
-package com.undef.manosLocalesCernikGaribaldi.activities
+package com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword
 
 
-import android.app.Activity
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,18 +18,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,28 +31,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.R
-import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.ManosLocalesTheme
+
+//import de los componentes
+import com.undef.manosLocalesCernikGaribaldi.activities.components.TopBar
+import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratRegular
+import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratSemiBold
+
 
 class ForgotPasswordActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            //esto va a manejar las vistas del forgot password
             AppNavigation()
         }
     }
@@ -75,60 +67,21 @@ fun AppNavigation() {
     //aca swapeamos entre los fragmentes de forgot password
     NavHost(navController, startDestination = "paso1") {
         composable("paso1") { ViewContainer(navController) }
-        composable("paso2") { Paso2() }
+        composable("paso2") { ScreenStep2(navController) }
     }
 }
 
 @Composable
 fun ViewContainer(navController: NavHostController) {
     Scaffold(
-        topBar = { TopBar(navController) }
+        //el top bar lo traigo de mi carpeta de componentes
+        topBar = { TopBar(navController, true) }
     ) { innerPadding ->
         Content(modifier = Modifier.padding(innerPadding), navController)
     }
 }
 
-@Composable
-fun Paso2() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text("¡Llegaste a la pantalla 2!", fontSize = 20.sp)
-    }
-}
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopBar(navController: NavHostController) {
-
-    //como hayq ue volver a otra avtivity se hace esto
-    val context = LocalContext.current
-    val activity = context as? Activity
-
-    CenterAlignedTopAppBar(
-        title = {
-            Image(
-                painter = painterResource(id = R.drawable.logoletras),
-                contentDescription = "Logo",
-                modifier = Modifier.size(180.dp)
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = {  activity?.finish() }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_arrow_back_24),
-                    contentDescription = "Volver",
-
-                    )
-            }
-        },
-
-        modifier = Modifier
-            .padding(14.dp)
-            .padding(top = 25.dp)
-    )
-}
 
 @Composable
 fun Content(modifier: Modifier, navController: NavHostController) {
@@ -147,6 +100,7 @@ fun Content(modifier: Modifier, navController: NavHostController) {
         Spacer(modifier = Modifier.height(24.dp))
         Text(
             text = "No te preocupes,\n ingresa tu mail",
+            //aca traigo el por defecto de mis tipografias y le cambio el fontsize
             style = TextStyle(
                 fontSize = 24.sp,
                 fontFamily = FontMontserratSemiBold
@@ -157,8 +111,9 @@ fun Content(modifier: Modifier, navController: NavHostController) {
         )
         Spacer(modifier = Modifier.height(24.dp))
         Input()
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(50.dp))
         GradientButton("Enviar codigo") {
+            //aca le digo lo que se va a ejecutar cuadno se clickee
             navController.navigate("paso2")
         }
     }
@@ -214,12 +169,11 @@ fun GradientButton(
 }
 
 
-//import de la fuente
-
+/*
 val FontMontserratSemiBold = FontFamily(
     Font(R.font.montserratsemibold) // usa el nombre exacto del archivo .ttf (sin extensión en el recurso)
 )
 
 val FontMontserratRegular = FontFamily(
     Font(R.font.montserratregular) // usa el nombre exacto del archivo .ttf (sin extensión en el recurso)
-)
+)*/
