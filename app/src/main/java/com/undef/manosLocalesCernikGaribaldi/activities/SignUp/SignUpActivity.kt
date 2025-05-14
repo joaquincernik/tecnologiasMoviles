@@ -1,4 +1,4 @@
-package com.undef.manosLocalesCernikGaribaldi.activities
+package com.undef.manosLocalesCernikGaribaldi.activities.SignUp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.undef.manosLocalesCernikGaribaldi.databinding.ActivitySignUpBinding

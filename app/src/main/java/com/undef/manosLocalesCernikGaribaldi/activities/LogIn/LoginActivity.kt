@@ -1,9 +1,10 @@
-package com.undef.manosLocalesCernikGaribaldi.activities
+package com.undef.manosLocalesCernikGaribaldi.activities.LogIn
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword.ForgotPasswordActivity
+import com.undef.manosLocalesCernikGaribaldi.activities.SignUp.SignUpActivity
 import com.undef.manosLocalesCernikGaribaldi.databinding.ActivityLoginBinding
 
 class LoginActivity : ComponentActivity() {

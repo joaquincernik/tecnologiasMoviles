@@ -1,10 +1,7 @@
-package com.undef.manosLocalesCernikGaribaldi.activities
+package com.undef.manosLocalesCernikGaribaldi.activities.Main
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.undef.manosLocalesCernikGaribaldi.R
 
 class PantallaPrincipalActivity : AppCompatActivity() {
@@ -13,5 +10,7 @@ class PantallaPrincipalActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pantalla_principal)
+
+
     }
 }

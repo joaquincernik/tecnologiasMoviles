@@ -1,4 +1,4 @@
-package com.undef.manosLocalesCernikGaribaldi.activities
+package com.undef.manosLocalesCernikGaribaldi.activities.SignUp
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.undef.manosLocalesCernikGaribaldi.R
+import com.undef.manosLocalesCernikGaribaldi.activities.LogIn.LoginActivity
 import com.undef.manosLocalesCernikGaribaldi.databinding.FragmentBienvenidaBinding
-import com.undef.manosLocalesCernikGaribaldi.databinding.FragmentSignUpBinding
 
 
 class BienvenidaFragment : Fragment() {

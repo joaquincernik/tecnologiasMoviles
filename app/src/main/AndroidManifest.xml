@@ -25,11 +25,11 @@
         <!-- </activity> -->
         <!-- Aca en el theme tuve que poner otra cosa no se por que verga no me dejaba poner el  android:theme="@style/Theme.ManosLocales"> -->
         <activity
-            android:name=".activities.SignUpActivity"
+            android:name=".activities.SignUp.SignUpActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.LogIn.LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.ManosLocales">

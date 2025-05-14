@@ -1,4 +1,4 @@
-package com.undef.manosLocalesCernikGaribaldi.activities
+package com.undef.manosLocalesCernikGaribaldi.activities.SignUp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
