@@ -18,14 +18,14 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier){
+fun BoxScreen(modifier: Modifier = Modifier){
     Column (
         modifier = modifier.fillMaxSize().background(Color(0xFF1976D2)),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(
-            text = "Home Screen",
+            text = "Box Screen",
             fontSize = 40.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color.White
