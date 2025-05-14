@@ -1,6 +1,5 @@
 package com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword
 
-import android.R.attr.fontFamily
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -32,11 +30,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.activities.components.TopBar
 import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratRegular
@@ -46,14 +42,14 @@ import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratS
 @Composable
 fun ScreenStep2(navController: NavHostController) {
     Scaffold(
-        topBar = { TopBar(navController ,false) }
+        topBar = { TopBar(navController, false) }
     ) { innerPadding ->
-        ContentStep2(modifier = Modifier.padding(innerPadding))
+        ContentStep2(modifier = Modifier.padding(innerPadding), navController)
     }
 }
 
 @Composable
-fun ContentStep2(modifier: Modifier){
+fun ContentStep2(modifier: Modifier, navController: NavHostController) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -81,12 +77,12 @@ fun ContentStep2(modifier: Modifier){
         Spacer(modifier = Modifier.height(35.dp))
         OtpInput(
             otpLength = 4,
-            onOtpComplete = {  }
+            onOtpComplete = { }
         )
         Spacer(modifier = Modifier.height(50.dp))
         GradientButton("Verificar") {
             //aca le digo lo que se va a ejecutar cuadno se clickee
-            //  navController.navigate("paso2")
+            navController.navigate("paso3")
         }
     }
 }
@@ -151,7 +147,9 @@ fun OtpInput(
                 ),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = colorResource(id = R.color.gris_claro).copy(alpha = 0.3f),
-                            //  Estos eliminan el borde
+                    focusedContainerColor = colorResource(id = R.color.gris_claro).copy(alpha = 0.3f),
+
+                    //  Estos eliminan el borde
                     focusedBorderColor = Color.Transparent,
                     unfocusedBorderColor = Color.Transparent
                 )
@@ -161,10 +159,11 @@ fun OtpInput(
     }
 }
 
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun PreviewScreenStep2() {
     val navController = rememberNavController()
     ScreenStep2(navController)
 }
+*/

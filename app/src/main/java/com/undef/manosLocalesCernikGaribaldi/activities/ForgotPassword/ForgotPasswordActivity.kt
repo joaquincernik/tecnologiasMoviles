@@ -68,6 +68,8 @@ fun AppNavigation() {
     NavHost(navController, startDestination = "paso1") {
         composable("paso1") { ViewContainer(navController) }
         composable("paso2") { ScreenStep2(navController) }
+        composable("paso3") { ScreenStep3(navController) }
+
     }
 }
 
