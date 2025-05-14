@@ -21,6 +21,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.undef.manosLocalesCernikGaribaldi.activities.components.NavItem
 
+// Para que entiendas el funcionamiento de lo que hice mirate este videito
+// https://youtu.be/O9csfKW3dZ4
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier){
