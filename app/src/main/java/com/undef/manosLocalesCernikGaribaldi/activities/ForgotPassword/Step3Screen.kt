@@ -42,13 +42,13 @@ fun ScreenStep3(navController: NavHostController) {
     Scaffold(
         topBar = { TopBar(navController ,false) }
     ) { innerPadding ->
-        ContentStep3(modifier = Modifier.padding(innerPadding))
+        ContentStep3(modifier = Modifier.padding(innerPadding), navController)
     }
 }
 
 
 @Composable
-fun ContentStep3(modifier: Modifier){
+fun ContentStep3(modifier: Modifier, navController: NavHostController){
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -78,7 +78,7 @@ fun ContentStep3(modifier: Modifier){
         Spacer(modifier = Modifier.height(50.dp))
         GradientButton("Continuar") {
             //aca le digo lo que se va a ejecutar cuadno se clickee
-            //  navController.navigate("paso2")
+              navController.navigate("home")
         }
     }
 }

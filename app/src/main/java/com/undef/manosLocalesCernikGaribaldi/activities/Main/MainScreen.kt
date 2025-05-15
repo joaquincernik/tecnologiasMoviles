@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductsScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.components.NavItem
 import com.undef.manosLocalesCernikGaribaldi.activities.components.BottomBar
 
@@ -76,7 +77,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
 fun ContentScreen(modifier: Modifier = Modifier, selectedIndex: Int) {
     when (selectedIndex) {
         0 -> HomeScreen()
-        1 -> BoxScreen()
+        1 -> ProductsScreen()
         2 -> ProfileScreen()
     }
 

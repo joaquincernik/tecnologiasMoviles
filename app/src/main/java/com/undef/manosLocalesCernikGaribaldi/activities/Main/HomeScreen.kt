@@ -49,7 +49,7 @@ import java.nio.file.WatchEvent
 @Preview(showBackground = true)
 fun HomeScreen(){
     Scaffold(
-        topBar = { TopBar(navController = rememberNavController()) },
+        topBar = { TopBar(navController = rememberNavController(), arrowInvisible = true) },
       //  bottomBar = { BottomBar() } la idea seria agregarlo aca ahora, pero hay que pensarla mejor
 
     ){ innerPadding->
