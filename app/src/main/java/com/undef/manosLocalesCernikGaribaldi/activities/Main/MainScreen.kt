@@ -25,48 +25,45 @@ import com.undef.manosLocalesCernikGaribaldi.activities.components.NavItem
 // https://youtu.be/O9csfKW3dZ4
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier){
+fun MainScreen(modifier: Modifier = Modifier) {
 
     val navItems = listOf(
-        NavItem("Home", painterResource(id = R.drawable.homelogo),painterResource(id = R.drawable.notselectedhome)),
-        NavItem("Box", painterResource(id = R.drawable.boxlogo),painterResource(id = R.drawable.notselectedbox)),
-        NavItem("User", painterResource(id = R.drawable.profilelogo),painterResource(id = R.drawable.notselectedprofile))
+        NavItem(
+            "Home",
+            painterResource(id = R.drawable.homelogo),
+            painterResource(id = R.drawable.notselectedhome)
+        ),
+        NavItem(
+            "Box",
+            painterResource(id = R.drawable.boxlogo),
+            painterResource(id = R.drawable.notselectedbox)
+        ),
+        NavItem(
+            "User",
+            painterResource(id = R.drawable.profilelogo),
+            painterResource(id = R.drawable.notselectedprofile)
+        )
     )
 
-    var selectedIndex by remember{
+    var selectedIndex by remember {
         mutableIntStateOf(0)
     }
 
-    Scaffold (
+    Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = { //para que este abajo
-            NavigationBar { // es un objeto que provee compose
-                navItems.forEachIndexed { index, navItem ->
-                    NavigationBarItem(
-                        selected = selectedIndex == index,
-                        onClick = {
-                            selectedIndex = index
-                        },
-                        icon = {
-                            Icon(
-                                painter = if (selectedIndex == index) navItem.icon else navItem.notSelectedIcon,//para cambiar los iconos
-                                contentDescription = navItem.label,
-                                modifier = Modifier.size(100.dp) //tamaño imagen
-                            )
-                        },
-//                        label = {
-//                            Text(text = navItem.label) si queres a este ponerlo puede llegar a ser a mi no me gusta
-//                        },
-                        colors = NavigationBarItemDefaults.colors(
-                            indicatorColor = Color.Transparent,           // Quita el violeta ese horrible que le pone arriba cuando lo tocas
-                            selectedIconColor = Color.Unspecified,        // Usa color original de la imagen
-                        )
-                    )
-                }
+            BottomBar(
+                navItems,
+                selectedIndex
+            ) { newIndex ->  //de aca agarro lo que me devolvio cuando clickee el boton
+                selectedIndex = newIndex
             }
         }
     ) { innerPadding ->
-        ContentScreen(modifier = Modifier.padding(innerPadding), selectedIndex) //le paso como parametro la pantalla que esta seleccionada
+        ContentScreen(
+            modifier = Modifier.padding(innerPadding),
+            selectedIndex
+        ) //le paso como parametro la pantalla que esta seleccionada
 
 
     }
@@ -74,12 +71,43 @@ fun MainScreen(modifier: Modifier = Modifier){
 
 //esta funcion define que es lo que se va a mostrar en pantalla.
 @Composable
-fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int){
-    when(selectedIndex){
-        0->HomeScreen()
-        1->BoxScreen()
-        2->ProfileScreen()
+fun ContentScreen(modifier: Modifier = Modifier, selectedIndex: Int) {
+    when (selectedIndex) {
+        0 -> HomeScreen()
+        1 -> BoxScreen()
+        2 -> ProfileScreen()
     }
 
+}
 
+
+//lo saque a otro lado para que lo podamos reutilizar nomas, pero estaba god
+@Composable
+fun BottomBar(
+    navItems: List<NavItem>,
+    selectedIndex: Int,
+    onItemSelected: (Int) -> Unit  //esto es lo que devuelve, cuando se toca el boton va a devolver el numero de index que toco
+) {
+
+    NavigationBar { // es un objeto que provee compose
+        navItems.forEachIndexed { index, navItem ->
+            NavigationBarItem(
+                selected = selectedIndex == index,
+                onClick = {
+                    onItemSelected(index)
+                },
+                icon = {
+                    Icon(
+                        painter = if (selectedIndex == index) navItem.icon else navItem.notSelectedIcon,//para cambiar los iconos
+                        contentDescription = navItem.label,
+                        modifier = Modifier.size(100.dp) //tamaño imagen
+                    )
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = Color.Transparent,           // Quita el violeta ese horrible que le pone arriba cuando lo tocas
+                    selectedIconColor = Color.Unspecified,        // Usa color original de la imagen
+                )
+            )
+        }
+    }
 }
