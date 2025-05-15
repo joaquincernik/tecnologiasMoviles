@@ -27,6 +27,7 @@ import com.undef.manosLocalesCernikGaribaldi.activities.components.NavItem
 @Composable
 fun MainScreen(modifier: Modifier = Modifier){
 
+    //aca podes poner hasta 5
     val navItems = listOf(
         NavItem("Home", painterResource(id = R.drawable.homelogo),painterResource(id = R.drawable.notselectedhome)),
         NavItem("Box", painterResource(id = R.drawable.boxlogo),painterResource(id = R.drawable.notselectedbox)),
