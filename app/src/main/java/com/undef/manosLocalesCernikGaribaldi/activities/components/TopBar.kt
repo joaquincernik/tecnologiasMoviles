@@ -18,7 +18,7 @@ import com.undef.manosLocalesCernikGaribaldi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(navController: NavHostController, volverActivity: Boolean) {
+fun TopBar(navController: NavHostController, volverActivity: Boolean = false, arrowInvisible: Boolean = false) {
 
     //como hayq ue volver a otra avtivity se hace esto
     val context = LocalContext.current
@@ -32,7 +32,10 @@ fun TopBar(navController: NavHostController, volverActivity: Boolean) {
                 modifier = Modifier.size(180.dp)
             )
         },
+
         navigationIcon = {
+            //si le llega arrowInvisible va a esconder la arrow
+            if(!arrowInvisible){
             IconButton(onClick = {
                 //aca tengo que decidir si vuelvo a otra activity o si vuelvo a lapila de nav
                 if (volverActivity) {
@@ -47,7 +50,7 @@ fun TopBar(navController: NavHostController, volverActivity: Boolean) {
                     contentDescription = "Volver",
 
                     )
-            }
+            }}
         },
 
         modifier = Modifier
