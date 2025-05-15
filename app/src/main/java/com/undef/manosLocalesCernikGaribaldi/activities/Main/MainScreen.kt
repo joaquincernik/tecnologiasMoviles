@@ -27,6 +27,7 @@ import com.undef.manosLocalesCernikGaribaldi.activities.components.NavItem
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
 
+    //aca podes poner hasta 5
     val navItems = listOf(
         NavItem(
             "Home",
