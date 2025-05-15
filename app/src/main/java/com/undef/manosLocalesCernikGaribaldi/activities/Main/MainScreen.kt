@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.undef.manosLocalesCernikGaribaldi.activities.components.NavItem
+import com.undef.manosLocalesCernikGaribaldi.activities.components.BottomBar
 
 // Para que entiendas el funcionamiento de lo que hice mirate este videito
 // https://youtu.be/O9csfKW3dZ4
