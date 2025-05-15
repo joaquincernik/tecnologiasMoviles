@@ -55,7 +55,7 @@ fun ContentProducts(modifier: Modifier){
             onValueChange = { textSearch = it },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp , end = 20.dp),
+                .padding(start = 20.dp , end = 20.dp, bottom = 20.dp),
             shape = RoundedCornerShape(15.dp),
             singleLine = true,
 

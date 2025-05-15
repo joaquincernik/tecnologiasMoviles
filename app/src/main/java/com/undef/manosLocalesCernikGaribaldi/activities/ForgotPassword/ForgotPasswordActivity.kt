@@ -39,6 +39,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.activities.Main.HomeScreen
+import com.undef.manosLocalesCernikGaribaldi.activities.Main.MainScreen
 
 //import de los componentes
 import com.undef.manosLocalesCernikGaribaldi.activities.components.TopBar
@@ -64,7 +65,7 @@ fun AppNavigation() {
         composable("paso1") { ViewContainer(navController) }
         composable("paso2") { ScreenStep2(navController) }
         composable("paso3") { ScreenStep3(navController) }
-        composable("home") { HomeScreen() }
+        composable("main") { MainScreen() }
 
     }
 }
