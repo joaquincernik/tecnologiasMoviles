@@ -40,6 +40,7 @@ import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.activities.Main.HomeScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Main.MainScreen
+import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductDetailScreen
 
 //import de los componentes
 import com.undef.manosLocalesCernikGaribaldi.activities.components.TopBar
@@ -60,13 +61,13 @@ class ForgotPasswordActivity : ComponentActivity() {
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
+
     //aca swapeamos entre los fragmentes de forgot password
     NavHost(navController, startDestination = "paso1") {
         composable("paso1") { ViewContainer(navController) }
         composable("paso2") { ScreenStep2(navController) }
         composable("paso3") { ScreenStep3(navController) }
-        composable("main") { MainScreen() }
-
+        composable("main") { MainScreen(navController) }
     }
 }
 
@@ -166,13 +167,3 @@ fun GradientButton(
         )
     }
 }
-
-
-/*
-val FontMontserratSemiBold = FontFamily(
-    Font(R.font.montserratsemibold) // usa el nombre exacto del archivo .ttf (sin extensión en el recurso)
-)
-
-val FontMontserratRegular = FontFamily(
-    Font(R.font.montserratregular) // usa el nombre exacto del archivo .ttf (sin extensión en el recurso)
-)*/

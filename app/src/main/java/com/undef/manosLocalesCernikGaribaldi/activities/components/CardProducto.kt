@@ -1,6 +1,5 @@
 package com.undef.manosLocalesCernikGaribaldi.activities.components
 
-import android.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,8 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -29,18 +28,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword.GradientButton
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.activities.Products.Product
 import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratBold
 import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratRegular
 import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratSemiBold
 
 @Composable
-fun CardProducto(item: Product) {
-
+fun CardProducto(item: Product, navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth() //modificador que hace que un Composable ocupe el ancho máximo disponible dentro del contenedor padre.
@@ -92,24 +91,30 @@ fun CardProducto(item: Product) {
 
                 Text(
                     text = item.descripcion,
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     fontFamily = FontMontserratRegular
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "Emprendimiento: " +item.emprendimiento,
-                    fontSize = 10.sp,
+                    fontSize = 12.sp,
                     fontFamily = FontMontserratRegular
                 )
                 Spacer(modifier = Modifier.height(12.dp))
-                GradientButtonProducto("Ver producto") {
+                /*GradientButtonProducto("Ver producto") {
                     //aca le digo lo que se va a ejecutar cuadno se clickee
-                  //  navController.navigate("main")
+                    navController.navigate("productDetail")
+                }*/
+                Button(onClick = {
+                    navController.navigate("productDetail")
+                }) {
+                    Text("Hola")
                 }
             }
         }
     }
 }
+
 
 
 

@@ -13,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -20,32 +21,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.R
-import com.undef.manosLocalesCernikGaribaldi.activities.Main.Content
-import com.undef.manosLocalesCernikGaribaldi.activities.components.CardEmprendimiento
+import com.undef.manosLocalesCernikGaribaldi.activities.components.BottomBar
 import com.undef.manosLocalesCernikGaribaldi.activities.components.CardProducto
 import com.undef.manosLocalesCernikGaribaldi.activities.components.TopBar
-import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratRegular
 
 @Composable
-@Preview
-fun ProductsScreen(){
+fun ProductsScreen(navController: NavHostController) {
+
+    //esto es para el bototm bar
+    var selectedIndex by remember {
+        mutableIntStateOf(0)
+    }
     Scaffold(
-    topBar = { TopBar(navController = rememberNavController(), arrowInvisible = true) },
-    //  bottomBar = { BottomBar() } la idea seria agregarlo aca ahora, pero hay que pensarla mejor
+    topBar = { TopBar(navController = navController, arrowInvisible = true) },
+     bottomBar = { BottomBar(selectedIndex,navController) }
 
     ){ innerPadding->
-        ContentProducts(Modifier.padding(innerPadding))
+        ContentProducts(Modifier.padding(innerPadding), navController)
     }
 }
 
 @Composable
-fun ContentProducts(modifier: Modifier){
+fun ContentProducts(modifier: Modifier, navController: NavHostController){
     var textSearch by remember { mutableStateOf(TextFieldValue("")) }
-
     val listaProductos= Product.getProductList()
 
     //ahora lo filtramos
@@ -82,7 +85,7 @@ fun ContentProducts(modifier: Modifier){
                 .weight(1f),
             content ={
                 itemsIndexed(listaProductosFiltrados, itemContent = {index, item ->
-                    CardProducto(item)//vamos a mostrar por pantalla los emprendimientos en la funcion definida mas abajo "Emprendimiento"
+                    CardProducto(item, navController)//vamos a mostrar por pantalla los emprendimientos en la funcion definida mas abajo "Emprendimiento"
                 })
             })
     }

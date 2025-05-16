@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrainsKotlinSerialization)
     id("kotlin-parcelize")
 }
 
@@ -48,6 +49,10 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation ("androidx.navigation:navigation-compose:2.9.0")
     implementation ("androidx.compose.material:material:1.6.1")
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
 
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
