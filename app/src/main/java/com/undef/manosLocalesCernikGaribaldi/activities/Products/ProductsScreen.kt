@@ -45,7 +45,13 @@ fun ProductsScreen(){
 @Composable
 fun ContentProducts(modifier: Modifier){
     var textSearch by remember { mutableStateOf(TextFieldValue("")) }
+
     val listaProductos= Product.getProductList()
+
+    //ahora lo filtramos
+    val listaProductosFiltrados = listaProductos.filter {
+        it.nombre.contains(textSearch.text,ignoreCase = true)
+    }
     Column (
         modifier = modifier
             .fillMaxSize()
@@ -58,7 +64,7 @@ fun ContentProducts(modifier: Modifier){
                 .padding(start = 20.dp , end = 20.dp, bottom = 20.dp),
             shape = RoundedCornerShape(15.dp),
             singleLine = true,
-
+            placeholder = { Text("Buscar producto") },
             //bordes
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedContainerColor = colorResource(id = R.color.gris_claro).copy(alpha = 0.3f),
@@ -75,7 +81,7 @@ fun ContentProducts(modifier: Modifier){
                 .fillMaxWidth()
                 .weight(1f),
             content ={
-                itemsIndexed(listaProductos, itemContent = {index, item ->
+                itemsIndexed(listaProductosFiltrados, itemContent = {index, item ->
                     CardProducto(item)//vamos a mostrar por pantalla los emprendimientos en la funcion definida mas abajo "Emprendimiento"
                 })
             })
