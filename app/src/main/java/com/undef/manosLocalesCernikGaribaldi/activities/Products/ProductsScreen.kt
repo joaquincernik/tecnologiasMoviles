@@ -35,7 +35,7 @@ fun ProductsScreen(navController: NavHostController) {
 
     //esto es para el bototm bar
     var selectedIndex by remember {
-        mutableIntStateOf(0)
+        mutableIntStateOf(1)
     }
     Scaffold(
     topBar = { TopBar(navController = navController, arrowInvisible = true) },

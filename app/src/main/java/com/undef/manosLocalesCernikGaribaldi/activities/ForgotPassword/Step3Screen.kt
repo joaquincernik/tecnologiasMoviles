@@ -78,7 +78,7 @@ fun ContentStep3(modifier: Modifier, navController: NavHostController){
         Spacer(modifier = Modifier.height(50.dp))
         GradientButton("Continuar") {
             //aca le digo lo que se va a ejecutar cuadno se clickee
-              navController.navigate("main")
+              navController.navigate("home")
         }
     }
 }

@@ -67,7 +67,7 @@ fun AppNavigation() {
         composable("paso1") { ViewContainer(navController) }
         composable("paso2") { ScreenStep2(navController) }
         composable("paso3") { ScreenStep3(navController) }
-        composable("main") { MainScreen(navController) }
+        composable("home") { HomeScreen(navController) }
     }
 }
 

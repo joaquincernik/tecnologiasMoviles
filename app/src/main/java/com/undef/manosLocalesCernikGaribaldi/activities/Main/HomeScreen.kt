@@ -83,9 +83,6 @@ fun Content(modifier: Modifier = Modifier, navController: NavHostController){
                 .fillMaxWidth()
                 .padding(16.dp)
         )
-      Button(onClick = {navController.navigate("products")}) {
-          Text("Ir a producto")
-      }
 
         LazyColumn(
             modifier = Modifier
