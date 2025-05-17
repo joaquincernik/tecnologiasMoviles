@@ -16,3 +16,7 @@ val FontMontserratRegular = FontFamily(
 val FontMontserratBold = FontFamily(
     Font(R.font.montserratbold) // usa el nombre exacto del archivo .ttf (sin extensión en el recurso)
 )
+
+val FontMontserratLight = FontFamily(
+    Font(R.font.montserratlight) // usa el nombre exacto del archivo .ttf (sin extensión en el recurso)
+)

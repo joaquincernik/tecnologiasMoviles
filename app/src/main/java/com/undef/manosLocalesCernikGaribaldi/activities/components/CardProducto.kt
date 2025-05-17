@@ -105,10 +105,8 @@ fun CardProducto(item: Product, navController: NavHostController) {
                     //aca le digo lo que se va a ejecutar cuadno se clickee
                     navController.navigate("productDetail")
                 }*/
-                Button(onClick = {
+                GradientButtonProducto{
                     navController.navigate("productDetail")
-                }) {
-                    Text("Hola")
                 }
             }
         }
@@ -120,7 +118,6 @@ fun CardProducto(item: Product, navController: NavHostController) {
 
 @Composable
 fun GradientButtonProducto(
-    text: String,
     onClick: () -> Unit
 ) {
     Box(
@@ -141,7 +138,7 @@ fun GradientButtonProducto(
             .clickable { onClick() }
     ) {
         Text(
-            text = text,
+            text = "Ver producto",
             color = Color.White,
             fontSize = 10.sp,
             fontFamily = FontMontserratSemiBold
