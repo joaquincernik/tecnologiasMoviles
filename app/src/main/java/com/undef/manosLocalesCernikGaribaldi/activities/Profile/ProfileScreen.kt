@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -80,7 +81,24 @@ fun Profile(modifier: Modifier, navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("Preferencias", fontWeight = FontWeight.Bold)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Preferencias",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
+
+            EditarPreferenciasButton {
+                navController.navigate("editarPreferencias")
+            }
+        }
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -90,8 +108,10 @@ fun Profile(modifier: Modifier, navController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
         //spacer
         GradientButtonPerfil{
-            navController.navigate("productDetail") // aca iria a pantalla de editar perfil
-        }
+            navController.navigate("editarPerfilScreen")
+        } // aca iria a pantalla de editar perfil
+
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -107,6 +127,25 @@ fun Profile(modifier: Modifier, navController: NavHostController) {
     }
 }
 
+@Composable
+fun EditarPreferenciasButton(onClick: () -> Unit){
+    Box(
+        contentAlignment = Alignment.Center,
+
+        modifier = Modifier
+            .height(20.dp)
+            .clickable {
+                onClick()
+            }
+    ) {
+        Text(
+            text = "Editar Preferencias",
+            color = Color.Gray,
+            fontSize = 15.sp,
+            fontFamily = FontMontserratSemiBold
+        )
+    }
+}
 @Composable
 fun InfoCard(label: String, value: String) {
     Box(
