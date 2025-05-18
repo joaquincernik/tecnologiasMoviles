@@ -7,5 +7,10 @@ import com.undef.manosLocalesCernikGaribaldi.R
 enum class Categoria() {
     MATE,
     ARTESANIA,
-    REGIONAL
+    REGIONAL,
+    ZAPATOS,
+    DEPORTES,
+    PC,
+    GAMING,
+    IPHONE
 }
