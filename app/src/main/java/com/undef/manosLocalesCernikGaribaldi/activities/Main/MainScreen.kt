@@ -1,24 +1,9 @@
 package com.undef.manosLocalesCernikGaribaldi.activities.Main
 
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import com.undef.manosLocalesCernikGaribaldi.R
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductsScreen
-import com.undef.manosLocalesCernikGaribaldi.activities.SignUp.navigation.NavigationCenter
-import com.undef.manosLocalesCernikGaribaldi.activities.components.NavItem
-import com.undef.manosLocalesCernikGaribaldi.activities.components.BottomBar
 
 // Para que entiendas el funcionamiento de lo que hice mirate este videito
 // https://youtu.be/O9csfKW3dZ4

@@ -1,7 +1,10 @@
 package com.undef.manosLocalesCernikGaribaldi.activities.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,15 +21,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratRegular
+import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratSemiBold
+
 
 @Composable
-fun CardEmprendimiento(item: Emprendimientos) {
+fun CardEmprendimiento(item: Emprendimientos, navController: NavHostController) {
 
     Card(
         modifier = Modifier
@@ -83,12 +95,46 @@ fun CardEmprendimiento(item: Emprendimientos) {
                     fontFamily = FontMontserratRegular
                 )
 
+                Spacer(modifier = Modifier.height(12.dp))
+
+                GradientButtonEmprendimiento {
+                    navController.navigate("emprendimientoDetail")
+                }
             }
         }
     }
 }
 
 
+@Composable
+fun GradientButtonEmprendimiento(
+    onClick: () -> Unit
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .width(150.dp)
+            .height(30.dp)
+            .padding(end = 10.dp)
+            .background(
+                brush = Brush.horizontalGradient(
+                    colors = listOf(
+                        colorResource(id = com.undef.manosLocalesCernikGaribaldi.R.color.celeste_fuerte), // azul claro
+                        colorResource(id = com.undef.manosLocalesCernikGaribaldi.R.color.azul_fuerte),  // azul oscuro
+                    )
+                ),
+                shape = RoundedCornerShape(25.dp) // pill shape
+            )
+            .clickable { onClick() }
+    ) {
+        Text(
+            text = "Ver emprendimiento",
+            color = Color.White,
+            fontSize = 10.sp,
+            fontFamily = FontMontserratSemiBold
+        )
+    }
+}
 
 
 

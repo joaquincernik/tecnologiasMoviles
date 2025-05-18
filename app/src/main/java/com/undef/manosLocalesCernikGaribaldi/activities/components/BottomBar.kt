@@ -1,5 +1,7 @@
 package com.undef.manosLocalesCernikGaribaldi.activities.components
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -8,6 +10,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -41,8 +44,7 @@ fun BottomBar(
     )
 
 
-
-    NavigationBar { // es un objeto que provee compose
+    NavigationBar(containerColor = Color.White) { // es un objeto que provee compose
         navItems.forEachIndexed { index, navItem ->
             NavigationBarItem(
                 selected = selectedIndex == index,
@@ -62,9 +64,10 @@ fun BottomBar(
                 },
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = Color.Transparent,           // Quita el violeta ese horrible que le pone arriba cuando lo tocas
-                    selectedIconColor = Color.Unspecified,        // Usa color original de la imagen
+                    selectedIconColor = colorResource(R.color.azul_fuerte),        // Usa color original de la imagen
                 )
             )
-        }
+
+    }
     }
 }

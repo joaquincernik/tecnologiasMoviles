@@ -8,8 +8,6 @@ import com.undef.manosLocalesCernikGaribaldi.activities.Main.HomeScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Profile.ProfileScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductDetailScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductsScreen
-import com.undef.manosLocalesCernikGaribaldi.activities.Profile.EditarPerfilScreen
-import com.undef.manosLocalesCernikGaribaldi.activities.Profile.EditarPreferenciasScreen
 
 @Composable
 
@@ -19,9 +17,8 @@ fun NavigationCenter(navController: NavHostController){
         composable("home") { HomeScreen(navController) }
         composable("products") { ProductsScreen(navController) }
         composable ("profile"){ ProfileScreen(navController) }
-        composable("editarPerfilScreen"){ EditarPerfilScreen(navController) }
+
         composable("productDetail") { ProductDetailScreen(navController) }
-        composable("editarPreferencias") { EditarPreferenciasScreen(navController) }
 
     }
 }

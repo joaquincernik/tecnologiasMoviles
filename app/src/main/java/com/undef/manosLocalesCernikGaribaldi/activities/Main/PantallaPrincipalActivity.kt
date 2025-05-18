@@ -4,9 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavGraph
 import androidx.navigation.compose.rememberNavController
-import com.undef.manosLocalesCernikGaribaldi.activities.SignUp.navigation.NavigationCenter
+import com.undef.manosLocalesCernikGaribaldi.activities.navigation.NavigationCenter
 
 
 class PantallaPrincipalActivity : ComponentActivity() {
