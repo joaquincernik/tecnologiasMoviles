@@ -11,9 +11,9 @@ import com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword.ScreenSte
 import com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword.ViewContainer
 import com.undef.manosLocalesCernikGaribaldi.activities.Main.HomeScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Main.MainScreen
-import com.undef.manosLocalesCernikGaribaldi.activities.Main.ProfileScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductDetailScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductsScreen
+import com.undef.manosLocalesCernikGaribaldi.activities.Profile.ProfileScreen
 
 @Composable
 
@@ -21,7 +21,7 @@ fun NavigationCenter(navController: NavHostController) {
     NavHost(navController, startDestination = "home") {
         composable("home") { HomeScreen(navController) }
         composable("products") { ProductsScreen(navController) }
-        composable("profile") { ProfileScreen() }
+       composable("profile") { ProfileScreen(navController) }
 
         //aca esto despues lo cambiamos por /id
         composable("emprendimientoDetail") { EmprendimientoDetailScreen(navController) }
