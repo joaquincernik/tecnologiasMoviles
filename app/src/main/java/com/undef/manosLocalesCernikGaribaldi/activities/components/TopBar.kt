@@ -2,6 +2,7 @@ package com.undef.manosLocalesCernikGaribaldi.activities.components
 
 import android.app.Activity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -12,6 +13,7 @@ import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -35,7 +37,9 @@ fun TopBar(navController: NavHostController, volverActivity: Boolean = false, ar
                 modifier = Modifier.size(180.dp)
             )
         },
-
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.White
+        ),
         navigationIcon = {
             //si le llega arrowInvisible va a esconder la arrow
             if(!arrowInvisible){
@@ -58,7 +62,7 @@ fun TopBar(navController: NavHostController, volverActivity: Boolean = false, ar
 
 
         modifier = Modifier
+            .background(color = Color.White)
             .padding(14.dp)
-            .padding(top = 25.dp)
     )
 }

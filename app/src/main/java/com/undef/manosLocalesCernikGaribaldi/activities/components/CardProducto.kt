@@ -39,14 +39,20 @@ import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratR
 import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratSemiBold
 
 @Composable
-fun CardProducto(item: Product, navController: NavHostController) {
+fun CardProducto(
+    item: Product,
+    navController: NavHostController,
+    esconderEmprendimiento: Boolean = false
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth() //modificador que hace que un Composable ocupe el ancho máximo disponible dentro del contenedor padre.
             .padding(horizontal = 16.dp, vertical = 16.dp),
         shape = RoundedCornerShape(16.dp), //para que tenga la forma redondeadita
         colors = CardDefaults.cardColors(
-            containerColor = colorResource(id = com.undef.manosLocalesCernikGaribaldi.R.color.gris_claro).copy(alpha = 0.1f),
+            containerColor = colorResource(id = com.undef.manosLocalesCernikGaribaldi.R.color.gris_claro).copy(
+                alpha = 0.1f
+            ),
         )
         // elevation = 8.dp, lo comento a estos dos porque me tira un conflicto nomas
 //backgroundColor = Color.White
@@ -71,8 +77,7 @@ fun CardProducto(item: Product, navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 10.dp, end = 5.dp, top = 14.dp, bottom = 10.dp)
-                ,
+                    .padding(start = 10.dp, end = 5.dp, top = 14.dp, bottom = 10.dp),
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -94,26 +99,26 @@ fun CardProducto(item: Product, navController: NavHostController) {
                     fontSize = 14.sp,
                     fontFamily = FontMontserratRegular
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "Emprendimiento: " +item.emprendimiento,
-                    fontSize = 12.sp,
-                    fontFamily = FontMontserratRegular
-                )
+                if (!esconderEmprendimiento) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Emprendimiento: " + item.emprendimiento,
+                        fontSize = 12.sp,
+                        fontFamily = FontMontserratRegular
+                    )
+                }
                 Spacer(modifier = Modifier.height(12.dp))
                 /*GradientButtonProducto("Ver producto") {
                     //aca le digo lo que se va a ejecutar cuadno se clickee
                     navController.navigate("productDetail")
                 }*/
-                GradientButtonProducto{
+                GradientButtonProducto {
                     navController.navigate("productDetail")
                 }
             }
         }
     }
 }
-
-
 
 
 @Composable

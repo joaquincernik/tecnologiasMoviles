@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
@@ -21,10 +20,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.undef.manosLocalesCernikGaribaldi.activities.SignUp.navigation.NavigationCenter
 import com.undef.manosLocalesCernikGaribaldi.activities.components.BottomBar
 import com.undef.manosLocalesCernikGaribaldi.activities.components.CardEmprendimiento
 import com.undef.manosLocalesCernikGaribaldi.activities.components.TopBar
@@ -32,6 +29,12 @@ import com.undef.manosLocalesCernikGaribaldi.activities.components.TopBar
 
 // para que entiendas lo que hice, fijate este video minuto: 8:40
 //https://youtu.be/ytCWjSN0iTI
+
+@Composable
+@Preview
+fun Prev(){
+    HomeScreen(rememberNavController())
+}
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -90,7 +93,7 @@ fun Content(modifier: Modifier = Modifier, navController: NavHostController){
                 .weight(1f),
             content ={
                 itemsIndexed(listaEmprendimientos, itemContent = {index, item ->
-                    CardEmprendimiento(item)//vamos a mostrar por pantalla los emprendimientos en la funcion definida mas abajo "Emprendimiento"
+                    CardEmprendimiento(item, navController)//vamos a mostrar por pantalla los emprendimientos en la funcion definida mas abajo "Emprendimiento"
                 })
             })
 }}

@@ -85,7 +85,7 @@ fun ContentProduct(modifier: Modifier, product: Product, navController: NavHostC
         modifier
             .fillMaxWidth()
             .background(
-                color = Color.White,
+                color = colorResource(R.color.blanquito),
             )
     ) {
         Box(

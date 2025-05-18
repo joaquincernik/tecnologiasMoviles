@@ -14,24 +14,33 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.TabRowDefaults.Divider
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,6 +49,7 @@ import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.activities.Products.Product
 import com.undef.manosLocalesCernikGaribaldi.activities.components.BottomBar
+import com.undef.manosLocalesCernikGaribaldi.activities.components.CardProducto
 import com.undef.manosLocalesCernikGaribaldi.activities.components.Categoria
 import com.undef.manosLocalesCernikGaribaldi.activities.components.Emprendimientos
 import com.undef.manosLocalesCernikGaribaldi.activities.components.TopBar
@@ -69,11 +79,15 @@ fun EmprendimientoDetailScreen(navController: NavHostController) {
     )
     Scaffold(
         topBar = { TopBar(navController) },
-        bottomBar = { BottomBar(selectedIndex, navController) }
+        bottomBar = {
+            BottomBar(selectedIndex, navController)
+        }
     ) { innerPadding ->
         ContentEmprendimiento(Modifier.padding(innerPadding), navController, emprendimientoPrueba)
     }
 }
+
+
 
 @Composable
 fun ContentEmprendimiento(
@@ -87,7 +101,7 @@ fun ContentEmprendimiento(
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
             .background(
-                color = Color.White,
+                color = colorResource(R.color.blanquito),
             )
     ) {
         //imagen de arirba
@@ -111,7 +125,6 @@ fun ContentEmprendimiento(
             )
         }
 
-
         Box(
             modifier = Modifier
                 .offset(y = (-20.dp))
@@ -122,43 +135,128 @@ fun ContentEmprendimiento(
                 )
         )
         {
-            Row(
-                modifier = Modifier
-                    .padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                modifier = Modifier.fillMaxWidth()
 
             ) {
-                //imagen de circulo
-                Image(
-                    painter = emprendimiento.imagen, //acordate que imagen es un painter
-                    contentDescription = emprendimiento.nombre,
-                    modifier = Modifier
-                        .size(100.dp)
-                        .clip(CircleShape),
-                    contentScale = ContentScale.Crop // esto es para que no se corte la imagen, sino queda mal
-                )
 
-                Spacer(modifier = Modifier.width(12.dp)) // ES PARA SEPARAR ELEMENTOS
+                Column(modifier = Modifier.fillMaxWidth()
+                    ) {
+                    Row(
+                        modifier = Modifier
+                            .padding(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
 
-                Column(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                    ) {
+                        //imagen de circulo
+                        Image(
+                            painter = emprendimiento.imagen, //acordate que imagen es un painter
+                            contentDescription = emprendimiento.nombre,
+                            modifier = Modifier
+                                .size(115.dp)
+                                .clip(CircleShape),
+                            contentScale = ContentScale.Crop // esto es para que no se corte la imagen, sino queda mal
+                        )
+
+                        Spacer(modifier = Modifier.width(12.dp)) // ES PARA SEPARAR ELEMENTOS
+
+                        Column(
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(
+                                text = emprendimiento.nombre,
+                                fontSize = 22.sp,
+                                fontFamily = FontMontserratBold,
+                            )
+                            Text(
+                                text = "Villa Carlos Paz",
+                                fontSize = 14.sp,
+                                fontFamily = FontMontserratRegular,
+                                modifier = Modifier.padding(top = 2.dp)
+                            )
+                        }
+
+                        //fin de el icono y eso
+                    }
+                    // Línea degradada (border bottom)
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(1.dp)
+                            .padding(horizontal = 20.dp)
+                            .background(
+                                brush = Brush.linearGradient(
+                                    colors = listOf(
+                                        colorResource(R.color.celeste_fuerte),
+                                        colorResource(R.color.azul_fuerte)
+                                    ) // azul a verde
+                                )
+                            )
+                    )
+                    // Título de productos
                     Text(
-                        text = emprendimiento.nombre,
-                        fontSize = 22.sp,
+                        text = "Productos",
+                        fontSize = 20.sp,
                         fontFamily = FontMontserratBold,
+                        modifier = Modifier.padding(start = 22.dp, top = 24.dp, bottom = 12.dp)
                     )
-                    Text(
-                        text = "Villa Carlos Paz",
-                        fontSize = 14.sp,
-                        fontFamily = FontMontserratRegular,
-                        modifier = Modifier.padding(top = 2.dp)
-                    )
+
+                    // Contenido de productos
+                    ContentProducts(navController = navController)
                 }
-                //fin de el icono y eso
             }
 
         }
     }
+}
 
+
+@Composable
+fun ContentProducts(navController: NavHostController) {
+    var textSearch by remember { mutableStateOf(TextFieldValue("")) }
+    val listaProductos = Product.getProductList()
+
+    //ahora lo filtramos
+    val listaProductosFiltrados = listaProductos.filter {
+        it.nombre.contains(textSearch.text, ignoreCase = true)
+    }
+
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        OutlinedTextField(
+            value = textSearch,
+            onValueChange = { textSearch = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
+            shape = RoundedCornerShape(15.dp),
+            singleLine = true,
+            placeholder = { Text("Buscar producto") },
+            //bordes
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedContainerColor = colorResource(id = R.color.gris_claro).copy(alpha = 0.3f),
+                focusedContainerColor = colorResource(id = R.color.gris_claro).copy(alpha = 0.3f),
+
+                //  Estos eliminan el borde
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent
+            )
+        )
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(500.dp) ,
+            content = {
+                itemsIndexed(listaProductosFiltrados, itemContent = { index, item ->
+                    CardProducto(
+                        item,
+                        navController,
+                        esconderEmprendimiento = true
+                    )//vamos a mostrar por pantalla los emprendimientos en la funcion definida mas abajo "Emprendimiento"
+                })
+            })
+
+    }
 }

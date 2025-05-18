@@ -1,5 +1,6 @@
 package com.undef.manosLocalesCernikGaribaldi.activities.Products
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -58,6 +59,7 @@ fun ContentProducts(modifier: Modifier, navController: NavHostController){
     Column (
         modifier = modifier
             .fillMaxSize()
+            .background(color = Color.White)
     ){
         OutlinedTextField(
             value = textSearch,
