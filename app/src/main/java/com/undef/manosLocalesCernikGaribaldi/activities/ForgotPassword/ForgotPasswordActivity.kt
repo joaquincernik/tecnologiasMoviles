@@ -39,7 +39,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.activities.Main.HomeScreen
-import com.undef.manosLocalesCernikGaribaldi.activities.Main.MainScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductDetailScreen
 
 //import de los componentes

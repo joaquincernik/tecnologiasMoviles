@@ -10,7 +10,6 @@ import com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword.ScreenSte
 import com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword.ScreenStep3
 import com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword.ViewContainer
 import com.undef.manosLocalesCernikGaribaldi.activities.Main.HomeScreen
-import com.undef.manosLocalesCernikGaribaldi.activities.Main.MainScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductDetailScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Products.ProductsScreen
 import com.undef.manosLocalesCernikGaribaldi.activities.Profile.EditarPerfilScreen
