@@ -71,6 +71,19 @@ fun Content(modifier: Modifier = Modifier, navController: NavHostController){
         Emprendimientos("EcoMates", painterResource(id = R.drawable.imagenprueba), "esto es una descripcion" , listaCategorias )
     )
 
+    //para hacer fetch de la api
+    /*private val _emprendimientosRemote =MutableLivedata<List<EmprendimientoDTO>>()
+    val listaEmprendimientos:LiveData<List<EmprendimientoDTO>> = _emprendimientosRemote
+
+
+    fun getEmprendimientosFromRemote(){
+        viewModelScope.launch {
+            _emprendimientosRemote.postValue(
+                EmprendimientosRepository().fetchEmprendimientos()
+            )
+        }
+
+    }*/
 
     Column (
         modifier = modifier
