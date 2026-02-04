@@ -12,6 +12,7 @@ data class LoginUiState(
     val loginSuccess: Boolean = false
 )
 
+
 class LoginViewModel : ViewModel(){
 
     //guion bajo porque es la privada
