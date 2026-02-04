@@ -71,6 +71,23 @@ fun Content(modifier: Modifier = Modifier, navController: NavHostController){
         Emprendimientos("EcoMates", painterResource(id = R.drawable.imagenprueba), "esto es una descripcion" , listaCategorias )
     )
 
+
+    //UN EJEMPLO PARA ACCEDER A LA BASE DE DATOS (YO ACA LO TENGO CON EJEMPLO DE PRODUCTOS.)
+    //en este caso estoy usando corutinas para acceder a la base de datos es la mejor forma de hacerlo
+    //creo que no te deja sino.
+    /*
+    * binding.boton.setOnClickListener {
+        lifecycleScope.launch(Dispatchers.IO){
+        * MyApplication.MyAppRoomDatabase.productDAO
+        *   .insertProduct(
+        *       ProductEntity(
+        *           campos a llenar
+        *       )
+        *   )
+        * }
+        * }
+        *           */
+
     //para hacer fetch de la api
     /*private val _emprendimientosRemote =MutableLivedata<List<EmprendimientoDTO>>()
     val listaEmprendimientos:LiveData<List<EmprendimientoDTO>> = _emprendimientosRemote

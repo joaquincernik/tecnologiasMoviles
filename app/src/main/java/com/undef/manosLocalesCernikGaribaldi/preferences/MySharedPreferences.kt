@@ -13,8 +13,8 @@ class MySharedPreferences(context: Context) {
         private val KEY_USER_AGE = "USER_AGE"
 
         // Instancia de SharedPreferences
-        private val preferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-
+        private val preferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) // siempre se usa el modo privado.
+        // fijate lo que hablamos de contexto. yo accedo a el a traves del contexto, es parte del framework de android.
         // Función para guardar el nombre de usuario
         fun setUserName(userName: String) {
             preferences.edit().putString(KEY_USER_NAME, userName).apply() // Guardamos el nombre
