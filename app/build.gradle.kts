@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrainsKotlinSerialization)
+    alias(libs.plugins.ksp)
     id("kotlin-parcelize")
 }
 
@@ -49,6 +50,12 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation ("androidx.navigation:navigation-compose:2.9.0")
     implementation ("androidx.compose.material:material:1.6.1")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.7.5")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    //Gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("androidx.compose.runtime:runtime-livedata:1.2.1")
 
