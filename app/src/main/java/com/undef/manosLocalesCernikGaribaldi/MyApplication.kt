@@ -2,8 +2,8 @@ package com.undef.manosLocalesCernikGaribaldi
 
 import android.app.Application
 import android.content.Context
-import com.undef.manosLocalesCernikGaribaldi.database.MyAppRoomDatabase
-import com.undef.manosLocalesCernikGaribaldi.preferences.MySharedPreferences
+import com.undef.manosLocalesCernikGaribaldi.data.local.database.MyAppRoomDatabase
+import com.undef.manosLocalesCernikGaribaldi.data.local.preferences.MySharedPreferences
 
 class MyApplication: Application() {
 
