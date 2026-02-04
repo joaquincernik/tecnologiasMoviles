@@ -1,5 +1,6 @@
 package com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -32,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.R
+import com.undef.manosLocalesCernikGaribaldi.activities.Main.PantallaPrincipalActivity
 import com.undef.manosLocalesCernikGaribaldi.activities.components.TopBar
 import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratRegular
 import com.undef.manosLocalesCernikGaribaldi.activities.ui.theme.FontMontserratSemiBold
@@ -76,9 +79,13 @@ fun ContentStep3(modifier: Modifier, navController: NavHostController){
         NewPasswordInput()
         RepeatNewPasswordInput()
         Spacer(modifier = Modifier.height(50.dp))
+
+        val context = LocalContext.current
         GradientButton("Continuar") {
             //aca le digo lo que se va a ejecutar cuadno se clickee
-              navController.navigate("home")
+              //navController.navigate("home")
+            val intent = Intent(context, PantallaPrincipalActivity::class.java )
+            context.startActivity(intent)
         }
     }
 }
