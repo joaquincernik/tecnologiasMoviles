@@ -39,8 +39,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.ForgotPassword.ScreenStep2
-import com.undef.manosLocalesCernikGaribaldi.ForgotPassword.ScreenStep3
 import com.undef.manosLocalesCernikGaribaldi.Main.HomeScreen
+import com.undef.manosLocalesCernikGaribaldi.activities.ForgotPassword.ScreenStep3
 
 //import de los componentes
 import com.undef.manosLocalesCernikGaribaldi.components.TopBar
