@@ -3,7 +3,10 @@ package com.undef.manosLocalesCernikGaribaldi
 import android.app.Application
 import android.content.Context
 import com.undef.manosLocalesCernikGaribaldi.data.local.database.MyAppRoomDatabase
+import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.UsuariosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.preferences.MySharedPreferences
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MyApplication: Application() {
 
@@ -25,5 +28,9 @@ class MyApplication: Application() {
         preferences = MySharedPreferences(applicationContext)
         myApplcationContext = applicationContext
         myAppDatabase = MyAppRoomDatabase.roomDatabase
+
+        //myAppDatabase = MyAppRoomDatabase.getDatabase(applicationContext)
+
+
     }
 }

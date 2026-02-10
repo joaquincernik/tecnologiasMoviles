@@ -25,4 +25,7 @@ interface UsuariosDao {
     @Transaction
     @Query("SELECT * FROM usuarios WHERE Id = :userId")
     suspend fun getUsuarioConFavoritos(userId: Int): UsuarioConFavoritos?
+
+    @Query("SELECT * FROM usuarios WHERE email = :email AND password = :pass LIMIT 1")
+    suspend fun login(email: String, pass: String): UsuariosEntity?
 }

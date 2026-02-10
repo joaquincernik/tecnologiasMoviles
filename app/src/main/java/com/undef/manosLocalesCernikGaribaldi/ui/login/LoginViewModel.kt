@@ -1,9 +1,50 @@
 package com.undef.manosLocalesCernikGaribaldi.ui.login
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.undef.manosLocalesCernikGaribaldi.MyApplication
+import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.UsuariosRepository
+import kotlinx.coroutines.launch
 
 class LoginViewModel: ViewModel() {
 
+    //lo que la activity observara
+    private val _uiState = MutableLiveData<LoginUiState>() //_ porque es privado
+    val uiState: LiveData<LoginUiState> get()  = _uiState //cuando acceda el valor de uistate obtengo el de _uistate
+
+
+    fun login(user:String, password:String) {
+    //validaciones simple
+        if(user.isEmpty() || password.isEmpty()) {
+            _uiState.value = LoginUiState(errorMessage = "Completa todos los campos")
+        }
+
+        //corrutina
+        viewModelScope.launch {
+            //simulacion de carga
+            _uiState.value = LoginUiState(isLoading = true)
+            val userDao = MyApplication.myAppDatabase.usuariosDao()
+            val repository = UsuariosRepository(userDao)
+
+
+            //busco en los usuarios
+            val user = repository.checkUser(user,password)
+
+            if(user!=null){
+                _uiState.value = LoginUiState(isSuccess = true)
+            }
+            else{
+                _uiState.value = LoginUiState(errorMessage = "Usuario o contraseña incorrectos")
+
+            }
+
+        }
+
+
+
+    }
     /*
     * Aca definis clases o funciones de negocio que vos queres separar de la parte visual digamos.
     * No podes definir en un composable un acceso a una base de datos, esta responsabilidad esta en otro lado.
@@ -87,7 +128,6 @@ Con Inyector (Hilt): Solo ponés una anotación y el sistema se encarga de "fabr
     * clase 19 explica como hacer lo del observable pero con compose.
     *
     * */
-
 
 
 }
