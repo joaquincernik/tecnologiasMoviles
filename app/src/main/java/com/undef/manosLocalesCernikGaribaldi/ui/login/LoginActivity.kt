@@ -29,6 +29,7 @@ class LoginActivity : ComponentActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel.register("joaquin","cernik", "joaquin@gmail.com", "0101")
         setupEventListeners()
         setupObservers()
     }

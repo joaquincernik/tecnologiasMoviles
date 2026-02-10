@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
+import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.UsuariosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.UsuariosRepository
 import kotlinx.coroutines.launch
 
@@ -13,7 +14,16 @@ class LoginViewModel: ViewModel() {
     //lo que la activity observara
     private val _uiState = MutableLiveData<LoginUiState>() //_ porque es privado
     val uiState: LiveData<LoginUiState> get()  = _uiState //cuando acceda el valor de uistate obtengo el de _uistate
+    val userDao = MyApplication.myAppDatabase.usuariosDao()
+    val repository = UsuariosRepository(userDao)
 
+    fun register(name:String, surname:String, email:String, password:String){
+        val nuevoUsuario = UsuariosEntity(email = email, password = password, name = name, surname = surname)
+        viewModelScope.launch {
+            repository.registerUser(nuevoUsuario)
+
+        }
+    }
 
     fun login(user:String, password:String) {
     //validaciones simple
@@ -25,8 +35,6 @@ class LoginViewModel: ViewModel() {
         viewModelScope.launch {
             //simulacion de carga
             _uiState.value = LoginUiState(isLoading = true)
-            val userDao = MyApplication.myAppDatabase.usuariosDao()
-            val repository = UsuariosRepository(userDao)
 
 
             //busco en los usuarios
