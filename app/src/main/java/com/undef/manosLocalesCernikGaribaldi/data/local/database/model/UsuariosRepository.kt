@@ -1,5 +1,7 @@
 package com.undef.manosLocalesCernikGaribaldi.data.local.database.model
 
+import com.undef.manosLocalesCernikGaribaldi.MyApplication
+
 
 class UsuariosRepository(private val usuariosDao: UsuariosDao) {
 
@@ -12,6 +14,9 @@ class UsuariosRepository(private val usuariosDao: UsuariosDao) {
         return usuariosDao.insertUsuario(usuario)
     }
 
+    suspend fun saveSession(email: String) {
+        // Usamos la instancia global que definimos en MyApplication
+        MyApplication.preferences.saveLoginData(email, true)}
 
 
 }

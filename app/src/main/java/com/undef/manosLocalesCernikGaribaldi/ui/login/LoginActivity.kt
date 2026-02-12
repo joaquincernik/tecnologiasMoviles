@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.semantics.text
+import com.undef.manosLocalesCernikGaribaldi.MyApplication
 import com.undef.manosLocalesCernikGaribaldi.ui.forgotPassword.ForgotPasswordActivity
 import com.undef.manosLocalesCernikGaribaldi.ui.main.PantallaPrincipalActivity
 import com.undef.manosLocalesCernikGaribaldi.ui.signUp.SignUpActivity
@@ -26,10 +27,16 @@ class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //chequeo de sesion
+        if (MyApplication.preferences.isLoggedIn()) {
+            startActivity(Intent(this, PantallaPrincipalActivity::class.java))
+            finish() // Cerramos el login para que no pueda volver atrás
+            return // Importante salir del onCreate
+        }
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.register("joaquin","cernik", "joaquin@gmail.com", "0101")
+        viewModel.register("joapato", "pro", "pro@gmail.com", "0101")
         setupEventListeners()
         setupObservers()
     }

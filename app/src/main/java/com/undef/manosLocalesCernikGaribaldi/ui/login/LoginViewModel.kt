@@ -25,9 +25,9 @@ class LoginViewModel: ViewModel() {
         }
     }
 
-    fun login(user:String, password:String) {
+    fun login(email:String, password:String) {
     //validaciones simple
-        if(user.isEmpty() || password.isEmpty()) {
+        if(email.isEmpty() || password.isEmpty()) {
             _uiState.value = LoginUiState(errorMessage = "Completa todos los campos")
         }
 
@@ -38,10 +38,12 @@ class LoginViewModel: ViewModel() {
 
 
             //busco en los usuarios
-            val user = repository.checkUser(user,password)
+            val user = repository.checkUser(email,password)
 
             if(user!=null){
                 _uiState.value = LoginUiState(isSuccess = true)
+                //aca guardamos en la shared preference
+                repository.saveSession(email)
             }
             else{
                 _uiState.value = LoginUiState(errorMessage = "Usuario o contraseña incorrectos")

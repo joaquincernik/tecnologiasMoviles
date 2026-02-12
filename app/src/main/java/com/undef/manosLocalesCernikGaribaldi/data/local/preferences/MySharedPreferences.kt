@@ -1,9 +1,27 @@
 package com.undef.manosLocalesCernikGaribaldi.data.local.preferences
 
 import android.content.Context
+import android.content.SharedPreferences
 
 //clase para manejar  todos los shared preferences. Es un ejemplo, despues vemos la utilidad.
 class MySharedPreferences(context: Context) {
+
+    private val storage: SharedPreferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+
+    fun saveLoginData(email: String, isLoggedIn: Boolean) {
+        storage.edit().apply {
+            putString("user_email", email)
+            putBoolean("is_logged_in", isLoggedIn)
+            apply()
+        }
+    }
+
+    fun getEmail(): String? = storage.getString("user_email", null)
+    fun isLoggedIn(): Boolean = storage.getBoolean("is_logged_in", false)
+
+    fun clear() {
+        storage.edit().clear().apply()
+    }
     /*
     * // El nombre del archivo de SharedPreferences
         private val PREFS_NAME = "com.undef.manoslocalescernikgaribaldi.preferences"
