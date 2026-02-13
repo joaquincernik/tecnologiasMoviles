@@ -14,6 +14,10 @@ class UsuariosRepository(private val usuariosDao: UsuariosDao) {
         return usuariosDao.insertUsuario(usuario)
     }
 
+    suspend fun getUserByEmail(email: String): UsuariosEntity? {
+        return usuariosDao.getUsuarioByEmail(email)
+    }
+
     suspend fun saveSession(email: String) {
         // Usamos la instancia global que definimos en MyApplication
         MyApplication.preferences.saveLoginData(email, true)}

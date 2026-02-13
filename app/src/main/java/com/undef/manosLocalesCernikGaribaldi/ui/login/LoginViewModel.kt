@@ -17,13 +17,7 @@ class LoginViewModel: ViewModel() {
     val userDao = MyApplication.myAppDatabase.usuariosDao()
     val repository = UsuariosRepository(userDao)
 
-    fun register(name:String, surname:String, email:String, password:String){
-        val nuevoUsuario = UsuariosEntity(email = email, password = password, name = name, surname = surname)
-        viewModelScope.launch {
-            repository.registerUser(nuevoUsuario)
 
-        }
-    }
 
     fun login(email:String, password:String) {
     //validaciones simple

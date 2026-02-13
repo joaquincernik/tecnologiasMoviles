@@ -62,7 +62,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/rounder_corner_input"
             android:fontFamily="@font/montserratlight"
-            android:hint="Usuario"
+            android:hint="Nombre de usuario"
             android:inputType="text"
             android:paddingHorizontal="15dp"
             android:textSize="12sp"

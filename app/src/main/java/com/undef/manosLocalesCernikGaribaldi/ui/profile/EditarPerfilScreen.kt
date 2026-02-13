@@ -34,19 +34,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
+
 @Composable
-fun EditarPerfilScreen(navController: NavHostController){
+fun EditarPerfilScreen(navController: NavHostController) {
     var selectedIndex by remember {
         mutableIntStateOf(2)
     }
     Scaffold(
         topBar = { TopBar(navController = navController, arrowInvisible = true) },
-        bottomBar = { BottomBar(selectedIndex,navController) }
+        bottomBar = { BottomBar(selectedIndex, navController) }
 
-    ){ innerPadding->
+    ) { innerPadding ->
         Edit(Modifier.padding(innerPadding), navController)
     }
 }
+
 @Composable
 fun Edit(modifier: Modifier, navController: NavHostController) {
     Column(
@@ -56,21 +58,23 @@ fun Edit(modifier: Modifier, navController: NavHostController) {
     ) {
 
         Text("Editar perfil", fontSize = 22.sp, fontWeight = FontWeight.Bold)
-    // acordate que toda esta info viene desde la clase User
-        var nombreUsuario by rememberSaveable { mutableStateOf("") }
+        // acordate que toda esta info viene desde la clase User
+        var nombre by rememberSaveable { mutableStateOf("") }
+        var apellido by rememberSaveable { mutableStateOf("") }
         var provincia by rememberSaveable { mutableStateOf("") }
         var ciudad by rememberSaveable { mutableStateOf("") }
         var telefono by rememberSaveable { mutableStateOf("") }
         var mail by rememberSaveable { mutableStateOf("") }
 
-        EditableInfoCard("Usuario", nombreUsuario, onValueChange = { nombreUsuario = it })
+        EditableInfoCard("Nombre", nombre, onValueChange = { nombre = it })
+        EditableInfoCard("Apellido", apellido, onValueChange = { apellido = it })
+        EditableInfoCard("Mail", mail, onValueChange = { mail = it })
         EditableInfoCard("Provincia", provincia, onValueChange = { provincia = it })
         EditableInfoCard("Ciudad", ciudad, onValueChange = { ciudad = it })
         EditableInfoCard("Telefono", telefono, onValueChange = { telefono = it })
-        EditableInfoCard("Mail", mail, onValueChange = { mail = it })
 
 
-        ButtonGuardar{
+        ButtonGuardar {
             //aca tenes que hacer toda la logica de guardado en usuario
             navController.navigate("profile")
         }
@@ -100,7 +104,7 @@ fun EditableInfoCard(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
                 label = { Text(label) },
-                )
+            )
         }
     }
 }

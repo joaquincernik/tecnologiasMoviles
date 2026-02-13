@@ -12,7 +12,8 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        tools:layout_editor_absoluteX="189dp"
+        tools:layout_editor_absoluteY="-175dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,7 @@ dependencies {
     implementation ("androidx.navigation:navigation-compose:2.9.0")
     implementation ("androidx.compose.material:material:1.6.1")
     implementation ("androidx.compose.runtime:runtime-livedata:1.7.5")
-
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     //Gson
