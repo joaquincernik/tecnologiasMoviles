@@ -1,5 +1,6 @@
 package com.undef.manosLocalesCernikGaribaldi.ui.signUp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import com.undef.manosLocalesCernikGaribaldi.ui.main.PantallaPrincipalActivity
 
 class SignUpFragment : Fragment() {
 
@@ -172,6 +174,15 @@ class SignUpFragment : Fragment() {
     private fun setupObservers() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
 
+            // MANEJO DEL LOADING
+            if (state.isLoading) {
+                // Muestra un ProgressBar si tienes uno, o deshabilita el botón
+                binding.buttonRegistrarme.isEnabled = false
+                binding.buttonRegistrarme.text = "Cargando..."
+            } else {
+                binding.buttonRegistrarme.isEnabled = state.isFormValid
+                binding.buttonRegistrarme.text = "Registrarme"
+            }
             val username = binding.inputUsuario.text.toString()
             val pass = binding.inputPassword.text.toString()
             val mail = binding.inputMail.text.toString()
@@ -183,18 +194,18 @@ class SignUpFragment : Fragment() {
             binding.statusMailCheck.visibility =
                 if (state.isMailValid) View.VISIBLE else View.GONE
 
-            if (mail.isNotEmpty()){
+            if (mail.isNotEmpty()) {
                 binding.statusMailError.visibility =
                     if (state.isMailValid && !mail.isEmpty()) View.GONE else View.VISIBLE
                 binding.textoErrorMail.visibility =
-                    if (state.isMailValid ) View.GONE else View.VISIBLE
+                    if (state.isMailValid) View.GONE else View.VISIBLE
 
             }
 
             // check pass
             binding.statusPasswordCheck.visibility =
                 if (state.isPasswordValid) View.VISIBLE else View.GONE
-            if(pass.isNotEmpty()){
+            if (pass.isNotEmpty()) {
                 binding.statusPasswordError.visibility =
                     if (state.isPasswordValid) View.GONE else View.VISIBLE
                 binding.textoErrorPassword.visibility =
@@ -205,7 +216,7 @@ class SignUpFragment : Fragment() {
             // check username
             binding.statusUsuarioCheck.visibility =
                 if (state.isUsernameValid) View.VISIBLE else View.GONE
-            if(username.isNotEmpty()){
+            if (username.isNotEmpty()) {
 
                 binding.statusUsuarioError.visibility =
                     if (state.isUsernameValid) View.GONE else View.VISIBLE
@@ -217,7 +228,7 @@ class SignUpFragment : Fragment() {
             // check provincia
             binding.statusProvinciaCheck.visibility =
                 if (state.isProvinciaValid) View.VISIBLE else View.GONE
-            if(provincia.isNotEmpty()){
+            if (provincia.isNotEmpty()) {
 
                 binding.statusProvinciaError.visibility =
                     if (state.isProvinciaValid) View.GONE else View.VISIBLE
@@ -229,9 +240,18 @@ class SignUpFragment : Fragment() {
             // El botón solo se habilita si el formulario es válido
             binding.buttonRegistrarme.isEnabled = state.isFormValid
 
-            if (state.isSuccess) {
+            binding.buttonRegistrarme.setOnClickListener {
                 viewModel.register(username, mail, pass, ciudad, provincia, telefono)
 
+            }
+            if (state.isSuccess) {
+                // Usamos requireContext() para obtener el contexto del Fragment
+                val intent = Intent(requireContext(), PantallaPrincipalActivity::class.java)
+
+                startActivity(intent)
+
+                // Cerramos la Activity que contiene al fragment (LoginActivity o AuthActivity)
+                requireActivity().finish()
             }
         }
 

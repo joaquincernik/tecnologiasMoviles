@@ -39,9 +39,10 @@ class SignUpViewModel : ViewModel() {
         _uiState.value = _uiState.value?.copy(isUsernameValid = isValid)
         validateForm()
     }
+
     fun onCiudadChanged(ciudad: String) {
         val isValid = ciudad.isNotEmpty()
-        _uiState.value = _uiState.value?.copy(isUsernameValid = isValid)
+        _uiState.value = _uiState.value?.copy(isCiudadValid = isValid)
         validateForm()
     }
 
@@ -68,7 +69,8 @@ class SignUpViewModel : ViewModel() {
         //_uiState.value: Intenta obtener el objeto SignUpUiState que está guardado actualmente en el LiveData.
         //?: return: Significa: "Si lo que está a la izquierda es nulo, deja de ejecutar esta función inmediatamente (return)".
 
-        val valid = s.isMailValid && s.isPasswordValid && s.isUsernameValid && s.isProvinciaValid && s.isTelefonoValid && s.isCiudadValid
+        val valid =
+            s.isMailValid && s.isPasswordValid && s.isUsernameValid && s.isProvinciaValid && s.isTelefonoValid && s.isCiudadValid
         _uiState.value = s.copy(isFormValid = valid)
     }
 
@@ -80,16 +82,31 @@ class SignUpViewModel : ViewModel() {
         provincia: String,
         telefono: String
     ) {
-        val nuevoUsuario = UsuariosEntity(
-            email = email,
-            password = password,
-            username = username,
-            ciudad = ciudad,
-            provincia = provincia,
-            telefono = telefono
-        )
+
         viewModelScope.launch {
-            repository.registerUser(nuevoUsuario)
+            _uiState.value = _uiState.value?.copy(isLoading = true)
+            //busco en los usuarios
+            val user = repository.checkUser(email, password)
+            if (user != null) {
+                _uiState.value = SignUpUiState(errorMessage = "El usuario ya existe")
+                return@launch
+            } else {
+                val nuevoUsuario = UsuariosEntity(
+                    email = email,
+                    password = password,
+                    username = username,
+                    ciudad = ciudad,
+                    provincia = provincia,
+                    telefono = telefono
+                )
+                repository.registerUser(nuevoUsuario)
+                _uiState.value = _uiState.value?.copy(
+                    isSuccess = true
+                )                //guardar en el sh pref
+                repository.saveSession(email)
+
+
+            }
         }
     }
 

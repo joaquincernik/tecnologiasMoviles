@@ -27,9 +27,7 @@ class LoginViewModel: ViewModel() {
 
         //corrutina
         viewModelScope.launch {
-            //simulacion de carga
             _uiState.value = LoginUiState(isLoading = true)
-
 
             //busco en los usuarios
             val user = repository.checkUser(email,password)
