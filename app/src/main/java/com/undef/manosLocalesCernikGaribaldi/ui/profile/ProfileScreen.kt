@@ -1,4 +1,6 @@
 package com.undef.manosLocalesCernikGaribaldi.ui.profile
+
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,7 +40,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.undef.manosLocalesCernikGaribaldi.R
+import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.UsuariosEntity
 import com.undef.manosLocalesCernikGaribaldi.ui.login.LoginActivity
 import com.undef.manosLocalesCernikGaribaldi.utils.components.Categoria
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratRegular
@@ -45,21 +50,39 @@ import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
 
 
 @Composable
-fun ProfileScreen(navController: NavHostController){
+fun ProfileScreen(navController: NavHostController, viewModel: ProfileViewModel = viewModel()) {
+    val context = LocalContext.current // Obtenemos el contexto de la Activity
+    // Observamos el LiveData y lo convertimos a State de Compose
+    val user by viewModel.user.observeAsState()
 
     var selectedIndex by remember {
         mutableIntStateOf(2)
     }
     Scaffold(
         topBar = { TopBar(navController = navController, arrowInvisible = true) },
-        bottomBar = { BottomBar(selectedIndex,navController) }
+        bottomBar = { BottomBar(selectedIndex, navController) }
 
-    ){ innerPadding->
-        Profile(Modifier.padding(innerPadding), navController)
+    ) { innerPadding ->
+        Profile(Modifier.padding(innerPadding), navController, user, onLogout = {
+            viewModel.logout()
+
+            //Navegar a LoginActivity cerrando la actual
+            val intent = Intent(context, LoginActivity::class.java)
+            context.startActivity(intent)
+            // 3. Cerramos la Activity actual (PantallaPrincipalActivity)
+            (context as? Activity)?.finish()
+        })
     }
 }
+
 @Composable
-fun Profile(modifier: Modifier, navController: NavHostController) {
+fun Profile(
+    modifier: Modifier,
+    navController: NavHostController,
+    user: UsuariosEntity?, // Recibimos los datos de Room
+    onLogout: () -> Unit
+) {
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -67,12 +90,19 @@ fun Profile(modifier: Modifier, navController: NavHostController) {
             .verticalScroll(rememberScrollState())
 
     ) {
-        InfoCard("Usuario", "nombredeusuario")
-        InfoCard("Provincia", "Chaco")
-        InfoCard("Ciudad", "Presidencia Roque Saenz Pena")
-        InfoCard("Telefono", "3644656565")
-        InfoCard("Mail", "joapatopro@gmail.com")
+        // Usamos los datos reales. Si 'user' es null (mientras carga), ponemos placeholders
+        InfoCard("Usuario", user?.username ?: "Cargando...")
+        InfoCard("Provincia", user?.provincia ?: "...")
+        InfoCard("Ciudad", user?.ciudad ?: "...")
+        InfoCard("Telefono", user?.telefono ?: "...")
+        InfoCard("Mail", user?.email ?: "...")
 
+        /*  InfoCard("Usuario", "nombredeusuario")
+          InfoCard("Provincia", "Chaco")
+          InfoCard("Ciudad", "Presidencia Roque Saenz Pena")
+          InfoCard("Telefono", "3644656565")
+          InfoCard("Mail", "joapatopro@gmail.com")
+  */
         Spacer(modifier = Modifier.height(16.dp))
 
         Row(
@@ -96,15 +126,15 @@ fun Profile(modifier: Modifier, navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        val categorias = Categoria.entries.toList() //aca hardcodeamos las categorias, despues habria que ver como levantar de la bd que categorias tiene cada usuario.
+        val categorias =
+            Categoria.entries.toList() //aca hardcodeamos las categorias, despues habria que ver como levantar de la bd que categorias tiene cada usuario.
         Preferencias(categorias)
 
         Spacer(modifier = Modifier.height(16.dp))
         //spacer
-        GradientButtonPerfil{
+        GradientButtonPerfil {
             navController.navigate("editarPerfilScreen")
         } // aca iria a pantalla de editar perfil
-
 
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -112,17 +142,18 @@ fun Profile(modifier: Modifier, navController: NavHostController) {
         val context = LocalContext.current
 
         ButtonCerrarSesion(
-            onClick = {
-                val intent = Intent(context, LoginActivity::class.java)
-                context.startActivity(intent)
-            }
+            onClick = onLogout
+            /*{
+            val intent = Intent(context, LoginActivity::class.java)
+            context.startActivity(intent)
+        }*/
         )
 
     }
 }
 
 @Composable
-fun EditarPreferenciasButton(onClick: () -> Unit){
+fun EditarPreferenciasButton(onClick: () -> Unit) {
     Box(
         contentAlignment = Alignment.Center,
 
@@ -140,6 +171,7 @@ fun EditarPreferenciasButton(onClick: () -> Unit){
         )
     }
 }
+
 @Composable
 fun InfoCard(label: String, value: String) {
     Box(
@@ -166,8 +198,9 @@ fun InfoCard(label: String, value: String) {
     }
 
 }
+
 @Composable
-fun GradientButtonPerfil (onClick: () -> Unit){
+fun GradientButtonPerfil(onClick: () -> Unit) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -229,21 +262,21 @@ fun ButtonCerrarSesion(onClick: () -> Unit) {
 }
 
 @Composable
-fun Preferencias(preferencias: List<Categoria>){
+fun Preferencias(preferencias: List<Categoria>) {
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        items(preferencias) { categoria->
+        items(preferencias) { categoria ->
             PreferenceCard(text = categoria.toString())
         }
     }
 }
 
 @Composable
-fun PreferenceCard(text: String){
+fun PreferenceCard(text: String) {
     Box(
         modifier = Modifier
             .size(width = 80.dp, height = 40.dp)
@@ -252,10 +285,10 @@ fun PreferenceCard(text: String){
                 shape = RoundedCornerShape(16.dp)
             ),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Text(
             text = text,
-            fontSize = 10.sp ,
+            fontSize = 10.sp,
             fontFamily = FontMontserratRegular
 
         )

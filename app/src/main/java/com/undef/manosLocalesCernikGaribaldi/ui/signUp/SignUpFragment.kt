@@ -176,7 +176,7 @@ class SignUpFragment : Fragment() {
 
             // MANEJO DEL LOADING
             if (state.isLoading) {
-                // Muestra un ProgressBar si tienes uno, o deshabilita el botón
+
                 binding.buttonRegistrarme.isEnabled = false
                 binding.buttonRegistrarme.text = "Cargando..."
             } else {

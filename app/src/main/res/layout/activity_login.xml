@@ -21,7 +21,7 @@
         android:id="@+id/input_correo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Correo electronico o usuario"
+        android:hint="Correo electronico"
         android:fontFamily="@font/montserratlight"
         android:inputType="textEmailAddress"
         android:background="@drawable/rounder_corner_input"
