@@ -1,10 +1,20 @@
-package com.undef.manosLocalesCernikGaribaldi.data.local.database.model
+package com.undef.manosLocalesCernikGaribaldi.data.local.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductCategoryCrossRef
+import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConCategorias
+import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 
 @Dao
 interface ProductosDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertProduct(product: ProductosEntity)
 
     @Update
@@ -27,6 +37,6 @@ interface ProductosDao {
     @Query("SELECT * FROM productos WHERE Id = :id")
     suspend fun getProductoConCategorias(id: Int): ProductoConCategorias?
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.Companion.IGNORE)
     suspend fun insertProductCategoryCrossRef(crossRef: ProductCategoryCrossRef)
 }

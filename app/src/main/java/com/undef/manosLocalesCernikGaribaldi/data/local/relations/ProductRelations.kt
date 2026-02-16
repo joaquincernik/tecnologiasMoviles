@@ -1,9 +1,14 @@
-package com.undef.manosLocalesCernikGaribaldi.data.local.database.model
+package com.undef.manosLocalesCernikGaribaldi.data.local.relations
 
 import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
-
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.CategoriasEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.FavoritosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductCategoryCrossRef
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 
 
 /*

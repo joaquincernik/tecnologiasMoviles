@@ -1,10 +1,18 @@
-package com.undef.manosLocalesCernikGaribaldi.data.local.database.model
+package com.undef.manosLocalesCernikGaribaldi.data.local.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
+import com.undef.manosLocalesCernikGaribaldi.data.local.relations.UsuarioConFavoritos
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 
 @Dao
 interface UsuariosDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertUsuario(usuario: UsuariosEntity)
 
     @Update

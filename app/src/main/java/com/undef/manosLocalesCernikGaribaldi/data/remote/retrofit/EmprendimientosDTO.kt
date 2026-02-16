@@ -1,7 +1,7 @@
 package com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit
 
 import com.google.gson.annotations.SerializedName
-import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.EmprendimientosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
 
 
 data class EmprendimientoDTO(

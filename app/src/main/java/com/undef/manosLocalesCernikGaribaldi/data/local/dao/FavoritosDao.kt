@@ -1,10 +1,15 @@
-package com.undef.manosLocalesCernikGaribaldi.data.local.database.model
+package com.undef.manosLocalesCernikGaribaldi.data.local.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.FavoritosEntity
 
 @Dao
 interface FavoritosDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.Companion.IGNORE)
     suspend fun insertFavorito(favorito: FavoritosEntity)
 
     @Delete

@@ -1,4 +1,4 @@
-package com.undef.manosLocalesCernikGaribaldi.data.local.database.model
+package com.undef.manosLocalesCernikGaribaldi.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

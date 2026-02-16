@@ -1,4 +1,4 @@
-package com.undef.manosLocalesCernikGaribaldi.data.local.database.model
+package com.undef.manosLocalesCernikGaribaldi.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
             entity = EmprendimientosEntity::class,
             parentColumns = ["Id"],
             childColumns = ["emprendimientoId"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.Companion.CASCADE
         )
     ]
 )

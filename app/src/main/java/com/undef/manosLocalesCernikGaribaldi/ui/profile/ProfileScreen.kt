@@ -42,7 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.undef.manosLocalesCernikGaribaldi.R
-import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.UsuariosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 import com.undef.manosLocalesCernikGaribaldi.ui.login.LoginActivity
 import com.undef.manosLocalesCernikGaribaldi.utils.components.Categoria
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratRegular

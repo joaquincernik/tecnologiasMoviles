@@ -4,7 +4,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
-import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.*
+import com.undef.manosLocalesCernikGaribaldi.data.local.dao.CategoriasDao
+import com.undef.manosLocalesCernikGaribaldi.data.local.dao.EmprendimientosDao
+import com.undef.manosLocalesCernikGaribaldi.data.local.dao.FavoritosDao
+import com.undef.manosLocalesCernikGaribaldi.data.local.dao.ProductosDao
+import com.undef.manosLocalesCernikGaribaldi.data.local.dao.UsuariosDao
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.CategoriasEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.FavoritosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductCategoryCrossRef
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 
 @Database(
     entities = [

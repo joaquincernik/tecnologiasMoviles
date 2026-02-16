@@ -1,6 +1,6 @@
 package com.undef.manosLocalesCernikGaribaldi.utils.components
 
-import androidx.compose.foundation.Image
+import coil.compose.AsyncImage
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,12 +30,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.undef.manosLocalesCernikGaribaldi.R
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratRegular
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
 
 
 @Composable
-fun CardEmprendimiento(item: Emprendimientos, navController: NavHostController) {
+fun CardEmprendimiento(item: EmprendimientosEntity, navController: NavHostController) {
 
     Card(
         modifier = Modifier
@@ -49,9 +50,9 @@ fun CardEmprendimiento(item: Emprendimientos, navController: NavHostController) 
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            Image(
-                painter = item.imagen, //acordate que imagen es un painter
-                contentDescription = item.nombre,
+            AsyncImage(
+                model = item.photoUrl, //acordate que imagen es un painter
+                contentDescription = item.name,
                 modifier = Modifier
                     .size(100.dp)
                     .padding(10.dp)//para que no quede pegado a los bordes
@@ -70,14 +71,14 @@ fun CardEmprendimiento(item: Emprendimientos, navController: NavHostController) 
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = item.nombre,
+                        text = item.name,
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
                         fontFamily = FontMontserratRegular,
                         modifier = Modifier.weight(1f)
                     )
                     Text(
-                        text = item.categorias.joinToString(" - ") { it.name },
+                        text = item.location,
                         fontSize = 12.sp,
                         color = Color.Gray,
                         modifier = Modifier.align(Alignment.CenterVertically)
@@ -87,7 +88,7 @@ fun CardEmprendimiento(item: Emprendimientos, navController: NavHostController) 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = item.descripcion,
+                    text = item.description,
                     fontSize = 14.sp,
                     fontFamily = FontMontserratRegular
                 )

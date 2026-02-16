@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
 import com.undef.manosLocalesCernikGaribaldi.R
-import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.UsuariosEntity
-import com.undef.manosLocalesCernikGaribaldi.data.local.database.model.UsuariosRepository
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.repository.UsuariosRepository
 import com.undef.manosLocalesCernikGaribaldi.ui.login.LoginUiState
 import kotlinx.coroutines.launch
 
