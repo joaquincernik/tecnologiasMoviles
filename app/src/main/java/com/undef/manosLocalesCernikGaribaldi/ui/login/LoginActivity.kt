@@ -13,7 +13,7 @@ import com.undef.manosLocalesCernikGaribaldi.ui.main.PantallaPrincipalActivity
 import com.undef.manosLocalesCernikGaribaldi.ui.signUp.SignUpActivity
 import com.undef.manosLocalesCernikGaribaldi.databinding.ActivityLoginBinding
 
-class LoginActivity : ComponentActivity() {
+class LoginActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginBinding
 

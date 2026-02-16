@@ -1,6 +1,8 @@
 package com.undef.manosLocalesCernikGaribaldi.data.local.database.model
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EmprendimientosDao {
@@ -14,7 +16,7 @@ interface EmprendimientosDao {
     suspend fun deleteEmprendimiento(emprendimiento: EmprendimientosEntity)
 
     @Query("SELECT * FROM emprendimientos")
-    suspend fun getAllEmprendimientos(): List<EmprendimientosEntity>
+    fun getAllEmprendimientos(): LiveData<List<EmprendimientosEntity>>
 
     @Query("SELECT * FROM emprendimientos WHERE Id = :id")
     suspend fun getEmprendimientoById(id: Int): EmprendimientosEntity?
