@@ -16,8 +16,10 @@ import androidx.room.PrimaryKey
     ]
 )
 data class ProductosEntity(
-    @PrimaryKey(autoGenerate = true) val Id: Int = 0,
+    @PrimaryKey val Id: Int,
     val name: String,
-    val price: Double,
-    val emprendimientoId: Int
+    val price: Int,
+    val description: String,
+    val emprendimientoId: Int,
+    val photoUrl: String,
 )

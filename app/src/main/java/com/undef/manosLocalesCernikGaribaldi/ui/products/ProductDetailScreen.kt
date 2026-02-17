@@ -11,13 +11,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,9 +36,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.SubcomposeAsyncImage
 import com.undef.manosLocalesCernikGaribaldi.R
+import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento
 import com.undef.manosLocalesCernikGaribaldi.utils.components.BottomBar
 import com.undef.manosLocalesCernikGaribaldi.utils.components.TopBar
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratBold
@@ -42,40 +49,48 @@ import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratLight
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratRegular
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
 
-@Composable
-@Preview
-fun TopBarPrev() {
+//@Composable
+//@Preview
+/*fun TopBarPrev() {
     ProductDetailScreen(rememberNavController())
 }
 
-
+*/
 @Composable
-fun ProductDetailScreen(navController: NavHostController) {
+fun ProductDetailScreen(navController: NavHostController, productId: Int, viewModel: ProductDetailViewModel = viewModel() ) {
+    //cuando cambie product id se ejecuta este bloque
+    LaunchedEffect(productId) {
+        viewModel.loadProduct(productId)
+    }
+
+    val producto = viewModel.producto.observeAsState()
 
     //esto es para el bototm bar
     var selectedIndex by remember {
         mutableIntStateOf(0)
     }
-    //momentaneo
-    val productoPrueba = Product(
-        99,
-        "Materazzi",
-        8000,
-        "Es reconocido por su durabilidad, resistencia y capacidad de conservar la temperatura gracias a su construcción de acero inoxidable con aislamiento al vacío.Los termos Stanley son populares entre aventureros, trabajadores de campo y personas que necesitan mantener sus bebidas a la temperatura ideal durante todo el día. ",
-        "Entre amigos",
-        R.drawable.matestanley,
-        false
-    )
+
     Scaffold(
         topBar = { TopBar(navController) },
         bottomBar = { BottomBar(selectedIndex,navController) }
     ) { innerPadding ->
-        ContentProduct(Modifier.padding(innerPadding), productoPrueba, navController)
-    }
+        // Si el producto ya cargó, mostramos el contenido
+        producto.value?.let { item ->
+            ContentProduct(
+                modifier = Modifier.padding(innerPadding),
+                product = item,
+                navController = navController
+            )
+        } ?: run {
+            // Aquí podrías mostrar un Shimmer o Loading
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("Cargando producto...")
+            }
+        }}
 }
 
 @Composable
-fun ContentProduct(modifier: Modifier, product: Product, navController: NavHostController) {
+fun ContentProduct(modifier: Modifier, product: ProductoConEmprendimiento, navController: NavHostController) {
     Column(
         modifier
             .fillMaxWidth()
@@ -89,12 +104,30 @@ fun ContentProduct(modifier: Modifier, product: Product, navController: NavHostC
                 .height(325.dp)
         ) {
             // Imagen que rellena la Box completamente
-            Image(
-                painter = painterResource(id = product.imagen),
-                contentDescription = "Imagen de producto",
+
+            SubcomposeAsyncImage(
+                model = product.producto.photoUrl, //acordate que imagen es un painter
+                contentDescription = product.producto.name,
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop // para que se recorte proporcionalmente
+                contentScale = ContentScale.Crop, // esto es para que no se corte la imagen, sino queda mal
+                loading = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                },
+                error = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("Error al cargar")
+                    }
+                }
             )
+
         }
 
         // Box blanca con borde redondeado arriba
@@ -114,7 +147,7 @@ fun ContentProduct(modifier: Modifier, product: Product, navController: NavHostC
 
             ) {
                 Text(
-                    text = "Mate ${product.nombre}",
+                    text = "Mate ${product.producto.name}",
                     fontFamily = FontMontserratBold,
                     fontSize = 22.sp,
                     color = Color.Black
@@ -123,7 +156,7 @@ fun ContentProduct(modifier: Modifier, product: Product, navController: NavHostC
                 Spacer(modifier = Modifier.height(7.dp))
 
                 Text(
-                    text = "$ ${product.precio}",
+                    text = "$ ${product.producto.price}",
                     fontFamily = FontMontserratLight,
                     fontSize = 20.sp,
                     color = Color.Gray
@@ -132,7 +165,7 @@ fun ContentProduct(modifier: Modifier, product: Product, navController: NavHostC
                 Spacer(modifier = Modifier.height(14.dp))
 
                 Text(
-                    text = product.descripcion,
+                    text = product.producto.description,
                     fontFamily = FontMontserratRegular,
                     color = Color.DarkGray,
                     lineHeight = 24.sp // Aquí defines el line height
@@ -140,7 +173,7 @@ fun ContentProduct(modifier: Modifier, product: Product, navController: NavHostC
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                GradientButtonDetail("Contactar proveedor") { }
+                GradientButtonDetail("Contactar ${product.emprendimiento.name}") { }
 
                 Spacer(modifier = Modifier.height(14.dp))
 

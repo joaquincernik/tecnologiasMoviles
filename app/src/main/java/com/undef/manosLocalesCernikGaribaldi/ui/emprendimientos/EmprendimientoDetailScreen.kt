@@ -247,12 +247,12 @@ fun ContentProducts(navController: NavHostController) {
                 .height(500.dp) ,
             content = {
                 itemsIndexed(listaProductosFiltrados, itemContent = { index, item ->
-                    CardProducto(
+                    /*CardProducto(
                         item,
                         navController,
                         esconderEmprendimiento = true
                     )//vamos a mostrar por pantalla los emprendimientos en la funcion definida mas abajo "Emprendimiento"
-                })
+               */ })
             })
 
     }

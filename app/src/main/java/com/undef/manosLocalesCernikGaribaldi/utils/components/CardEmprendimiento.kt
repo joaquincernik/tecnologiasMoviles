@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.SubcomposeAsyncImage
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratRegular
@@ -50,14 +53,30 @@ fun CardEmprendimiento(item: EmprendimientosEntity, navController: NavHostContro
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            AsyncImage(
+            SubcomposeAsyncImage(
                 model = item.photoUrl, //acordate que imagen es un painter
                 contentDescription = item.name,
                 modifier = Modifier
                     .size(100.dp)
                     .padding(10.dp)//para que no quede pegado a los bordes
                     .clip(CircleShape),
-                contentScale = ContentScale.Crop // esto es para que no se corte la imagen, sino queda mal
+                contentScale = ContentScale.Crop, // esto es para que no se corte la imagen, sino queda mal
+                loading = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                },
+                error = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("Error al cargar")
+                    }
+                }
             )
 
             Spacer(modifier = Modifier.width(16.dp)) // ES PARA SEPARAR ELEMENTOS

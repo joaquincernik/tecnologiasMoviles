@@ -8,14 +8,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,15 +33,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.SubcomposeAsyncImage
 import com.undef.manosLocalesCernikGaribaldi.ui.products.Product
 import com.undef.manosLocalesCernikGaribaldi.R
+import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratBold
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratRegular
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
 
 @Composable
 fun CardProducto(
-    item: Product,
+    item: ProductoConEmprendimiento,
     navController: NavHostController,
     esconderEmprendimiento: Boolean = false
 ) {
@@ -60,13 +65,37 @@ fun CardProducto(
                 .padding(top = 14.dp, bottom = 14.dp, start = 20.dp, end = 5.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = item.imagen), //acordate que imagen es un painter
-                contentDescription = item.nombre,
+            /* Image(
+                 painter = painterResource(id = item.imagen), //acordate que imagen es un painter
+                 contentDescription = item.nombre,
+                 modifier = Modifier
+                     .size(115.dp)
+                     .clip(RoundedCornerShape(10.dp)),
+                 contentScale = ContentScale.Crop // esto es para que no se corte la imagen, sino queda mal
+             )*/
+            SubcomposeAsyncImage(
+                model = item.producto.photoUrl, //acordate que imagen es un painter
+                contentDescription = item.producto.name,
                 modifier = Modifier
                     .size(115.dp)
                     .clip(RoundedCornerShape(10.dp)),
-                contentScale = ContentScale.Crop // esto es para que no se corte la imagen, sino queda mal
+                contentScale = ContentScale.Crop, // esto es para que no se corte la imagen, sino queda mal
+                loading = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                },
+                error = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("Error al cargar")
+                    }
+                }
             )
 
             Spacer(modifier = Modifier.width(16.dp)) // ES PARA SEPARAR ELEMENTOS
@@ -82,7 +111,7 @@ fun CardProducto(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = item.nombre,
+                        text = item.producto.name,
                         fontWeight = FontWeight.Bold,
                         fontSize = 17.sp,
                         fontFamily = FontMontserratBold,
@@ -93,28 +122,56 @@ fun CardProducto(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = item.descripcion,
+                    text = item.producto.description,
                     fontSize = 14.sp,
                     fontFamily = FontMontserratRegular
                 )
-                if (!esconderEmprendimiento) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Emprendimiento: " + item.emprendimiento,
-                        fontSize = 12.sp,
-                        fontFamily = FontMontserratRegular
-                    )
-                }
-                Spacer(modifier = Modifier.height(12.dp))
-                /*GradientButtonProducto("Ver producto") {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Emprendimiento: " + item.emprendimiento.name,
+                    fontSize = 12.sp,
+                    fontFamily = FontMontserratRegular
+                )
+
+                /*Spacer(modifier = Modifier.height(12.dp))
+                GradientButtonProducto("Ver producto") {
                     //aca le digo lo que se va a ejecutar cuadno se clickee
                     navController.navigate("productDetail")
-                }*/
+                }
                 GradientButtonProducto {
                     navController.navigate("productDetail")
+                }*/
+                Spacer(modifier = Modifier.height(12.dp))
+
+// PRECIO + BOTÓN EN UNA FILA
+
+                    val precioFormateado = "$ %,d".format(item.producto.price)
+
+                    Column {
+                        Text(
+                            text = "Precio",
+                            fontSize = 11.sp,
+                            fontFamily = FontMontserratRegular,
+                            color = Color.Gray
+                        )
+
+                        Text(
+                            text = precioFormateado,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontMontserratBold,
+                            color = colorResource(id = R.color.azul_fuerte)
+                        )
+                    }
+                Spacer(modifier = Modifier.height(6.dp))
+
+                    GradientButtonProducto {
+                        navController.navigate("productDetail/${item.producto.Id}")
+                    }
                 }
+
             }
-        }
+
     }
 }
 

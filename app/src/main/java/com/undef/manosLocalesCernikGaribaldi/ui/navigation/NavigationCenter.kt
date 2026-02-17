@@ -2,8 +2,10 @@ package com.undef.manosLocalesCernikGaribaldi.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.undef.manosLocalesCernikGaribaldi.ui.emprendimientos.EmprendimientoDetailScreen
 import com.undef.manosLocalesCernikGaribaldi.ui.main.HomeScreen
 import com.undef.manosLocalesCernikGaribaldi.ui.products.ProductDetailScreen
@@ -21,8 +23,21 @@ fun NavigationCenter(navController: NavHostController) {
         composable("profile") { ProfileScreen(navController) }
         composable("editarPreferencias"){ EditarPreferenciasScreen(navController) }
         composable("emprendimientoDetail") { EmprendimientoDetailScreen(navController) }
-        composable("productDetail") { ProductDetailScreen(navController) }
         composable("editarPerfilScreen"){ EditarPerfilScreen(navController) }
+        composable(
+            route = "productDetail/{productId}",
+            arguments = listOf(
+                navArgument("productId") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+
+            val productId = backStackEntry.arguments?.getInt("productId") ?: 0
+
+            ProductDetailScreen(
+                productId = productId,
+                navController = navController
+            )
+        }
 
     }
 }
