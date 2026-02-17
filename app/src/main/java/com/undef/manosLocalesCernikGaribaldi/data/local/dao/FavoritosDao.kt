@@ -1,5 +1,6 @@
 package com.undef.manosLocalesCernikGaribaldi.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -15,9 +16,14 @@ interface FavoritosDao {
     @Delete
     suspend fun deleteFavorito(favorito: FavoritosEntity)
 
-    @Query("DELETE FROM favoritos WHERE userId = :userId AND productId = :productId")
-    suspend fun removeFavorito(userId: Int, productId: Int)
+    @Query("DELETE FROM favoritos WHERE userId = :userId AND emprendimientoId = :emprendimientoId")
+    suspend fun removeFavorito(userId: Int, emprendimientoId: Int)
 
-    @Query("SELECT EXISTS(SELECT 1 FROM favoritos WHERE userId = :userId AND productId = :productId)")
-    suspend fun isFavorito(userId: Int, productId: Int): Boolean
+    //para pintar la estrellita necesito que devuelva un live data asincrono
+    @Query("SELECT EXISTS(SELECT 1 FROM favoritos WHERE userId = :userId AND emprendimientoId = :emprendimientoId)")
+    fun isFavorito(userId: Int, emprendimientoId: Int): LiveData<Boolean>
+
+    //cuando toco el boton, se llama aca,
+    @Query("SELECT EXISTS(SELECT 1 FROM favoritos WHERE userId = :userId AND emprendimientoId = :emprendimientoId)")
+    fun isFavoritoSync(userId: Int, emprendimientoId: Int): Boolean
 }

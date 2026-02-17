@@ -16,10 +16,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,79 +38,112 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.SubcomposeAsyncImage
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
+import com.undef.manosLocalesCernikGaribaldi.ui.main.MainViewModel
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratRegular
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
 
 
 @Composable
-fun CardEmprendimiento(item: EmprendimientosEntity, navController: NavHostController) {
-
+fun CardEmprendimiento(
+    item: EmprendimientosEntity,
+    navController: NavHostController,
+    viewModel: MainViewModel = viewModel()
+) {
+    // Observamos si este emprendimiento en particular es favorito
+    val esFavorito by viewModel.isFavorito(item.Id).observeAsState(initial = false)
     Card(
         modifier = Modifier
-            .fillMaxWidth() //modificador que hace que un Composable ocupe el ancho máximo disponible dentro del contenedor padre.
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        shape = RoundedCornerShape(16.dp), //para que tenga la forma redondeadita
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
         // elevation = 8.dp, lo comento a estos dos porque me tira un conflicto nomas
 //backgroundColor = Color.White
     ) {
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
-            SubcomposeAsyncImage(
-                model = item.photoUrl, //acordate que imagen es un painter
-                contentDescription = item.name,
-                modifier = Modifier
-                    .size(100.dp)
-                    .padding(10.dp)//para que no quede pegado a los bordes
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop, // esto es para que no se corte la imagen, sino queda mal
-                loading = {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
+        Column {
+
+            // 🔹 Imagen con favorito superpuesto
+            Box {
+
+                SubcomposeAsyncImage(
+                    model = item.photoUrl,
+                    contentDescription = item.name,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(180.dp),
+                    contentScale = ContentScale.Crop,
+                    loading = {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    },
+                    error = {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("Error al cargar")
+                        }
                     }
-                },
-                error = {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text("Error al cargar")
-                    }
+                )
+
+                // ❤️ Botón favorito flotante
+                IconButton(
+                    onClick = {
+                        viewModel.toggleFavorito(item.Id)
+                              },
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(12.dp)
+                        .background(
+                            color = Color.White.copy(alpha = 0.85f),
+                            shape = CircleShape
+                        )
+                ) {
+                    Icon(
+                        imageVector = if (esFavorito)
+                            Icons.Filled.Favorite
+                        else
+                            Icons.Filled.FavoriteBorder,
+                        contentDescription = "Favorito",
+                        tint = if (esFavorito) Color.Red else Color.Gray
+                    )
                 }
-            )
+            }
 
-            Spacer(modifier = Modifier.width(16.dp)) // ES PARA SEPARAR ELEMENTOS
-
-
+            // 🔹 Contenido
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.padding(16.dp)
             ) {
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = item.name,
-                        fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
-                        fontFamily = FontMontserratRegular,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontMontserratSemiBold,
                         modifier = Modifier.weight(1f)
                     )
+
                     Text(
                         text = item.location,
                         fontSize = 12.sp,
-                        color = Color.Gray,
-                        modifier = Modifier.align(Alignment.CenterVertically)
+                        color = Color.Gray
                     )
                 }
 
@@ -109,13 +152,31 @@ fun CardEmprendimiento(item: EmprendimientosEntity, navController: NavHostContro
                 Text(
                     text = item.description,
                     fontSize = 14.sp,
+                    color = Color.DarkGray,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
                     fontFamily = FontMontserratRegular
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(14.dp))
 
-                GradientButtonEmprendimiento {
-                    navController.navigate("emprendimientoDetail")
+                Button(
+                    onClick = {
+                        navController.navigate("emprendimientoDetail/${item.Id}")
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(45.dp),
+                    shape = RoundedCornerShape(30.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.azul_fuerte)
+                    )
+                ) {
+                    Text(
+                        text = "Ver emprendimiento",
+                        color = Color.White,
+                        fontFamily = FontMontserratSemiBold
+                    )
                 }
             }
         }

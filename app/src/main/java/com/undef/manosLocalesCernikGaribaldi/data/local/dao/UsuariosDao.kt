@@ -7,13 +7,13 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.undef.manosLocalesCernikGaribaldi.data.local.relations.UsuarioConFavoritos
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 
 @Dao
 interface UsuariosDao {
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
-    suspend fun insertUsuario(usuario: UsuariosEntity)
+    suspend fun insertUsuario(usuario: UsuariosEntity): Long //devuelve el id
+
 
     @Update
     suspend fun updateUsuario(usuario: UsuariosEntity)
@@ -30,10 +30,10 @@ interface UsuariosDao {
     @Query("SELECT * FROM usuarios WHERE email = :email LIMIT 1")
     suspend fun getUsuarioByEmail(email: String): UsuariosEntity?
 
-    @Transaction
+/*    @Transaction
     @Query("SELECT * FROM usuarios WHERE Id = :userId")
     suspend fun getUsuarioConFavoritos(userId: Int): UsuarioConFavoritos?
-
+*/
     @Query("SELECT * FROM usuarios WHERE email = :email AND password = :pass LIMIT 1")
     suspend fun login(email: String, pass: String): UsuariosEntity?
 }

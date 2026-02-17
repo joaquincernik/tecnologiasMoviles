@@ -99,11 +99,11 @@ class SignUpViewModel : ViewModel() {
                     provincia = provincia,
                     telefono = telefono
                 )
-                repository.registerUser(nuevoUsuario)
+                val idCreated = repository.registerUser(nuevoUsuario)
                 _uiState.value = _uiState.value?.copy(
                     isSuccess = true
                 )                //guardar en el sh pref
-                repository.saveSession(email)
+                repository.saveSession(email, idCreated)
 
 
             }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
@@ -15,6 +16,7 @@ import com.undef.manosLocalesCernikGaribaldi.utils.components.Emprendimientos
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.utils.components.Categoria
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -22,6 +24,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -96,8 +100,18 @@ fun Content(
             placeholder = { Text("Buscar emprendimiento por nombre") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            singleLine = true
+                .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
+            shape = RoundedCornerShape(15.dp),
+            singleLine = true,
+            //bordes
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedContainerColor = colorResource(id = R.color.gris_claro).copy(alpha = 0.3f),
+                focusedContainerColor = colorResource(id = R.color.gris_claro).copy(alpha = 0.3f),
+
+                //  Estos eliminan el borde
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent
+            )
         )
 
         LazyColumn(

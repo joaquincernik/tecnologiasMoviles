@@ -15,7 +15,7 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 
 @Dao
 interface ProductosDao {
-    @Insert(onConflict = OnConflictStrategy.Companion.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertProduct(product: ProductosEntity)
 
     @Update

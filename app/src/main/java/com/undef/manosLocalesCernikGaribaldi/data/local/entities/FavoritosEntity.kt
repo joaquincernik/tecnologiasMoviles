@@ -7,7 +7,7 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 
 @Entity(
     tableName = "favoritos",
-    primaryKeys = ["userId", "productId"],
+    primaryKeys = ["userId", "emprendimientoId"],
     foreignKeys = [
         ForeignKey(
             entity = UsuariosEntity::class,
@@ -16,14 +16,14 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
             onDelete = ForeignKey.Companion.CASCADE
         ),
         ForeignKey(
-            entity = ProductosEntity::class,
+            entity = EmprendimientosEntity::class,
             parentColumns = ["Id"],
-            childColumns = ["productId"],
-            onDelete = ForeignKey.Companion.CASCADE
+            childColumns = ["emprendimientoId"],
+            onDelete = ForeignKey.Companion.NO_ACTION
         )
     ]
 )
 data class FavoritosEntity(
     val userId: Int,
-    val productId: Int
+    val emprendimientoId: Int
 )

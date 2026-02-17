@@ -11,17 +11,17 @@ class UsuariosRepository(private val usuariosDao: UsuariosDao) {
         return usuariosDao.login(email, pass)
     }
 
-    suspend fun registerUser(usuario: UsuariosEntity) {
-        return usuariosDao.insertUsuario(usuario)
+    suspend fun registerUser(usuario: UsuariosEntity) : Int {
+        return usuariosDao.insertUsuario(usuario).toInt()
     }
 
     suspend fun getUserByEmail(email: String): UsuariosEntity? {
         return usuariosDao.getUsuarioByEmail(email)
     }
 
-    suspend fun saveSession(email: String) {
+    suspend fun saveSession(email: String,id: Int) {
         // Usamos la instancia global que definimos en MyApplication
-        MyApplication.Companion.preferences.saveLoginData(email, true)}
+        MyApplication.Companion.preferences.saveLoginData(email, true, id)}
 
 
 }

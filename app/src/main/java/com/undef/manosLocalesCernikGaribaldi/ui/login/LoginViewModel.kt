@@ -35,7 +35,7 @@ class LoginViewModel: ViewModel() {
             if(user!=null){
                 _uiState.value = LoginUiState(isSuccess = true)
                 //aca guardamos en la shared preference
-                repository.saveSession(email)
+                repository.saveSession(email, user.Id)
             }
             else{
                 _uiState.value = LoginUiState(errorMessage = "Usuario o contraseña incorrectos")

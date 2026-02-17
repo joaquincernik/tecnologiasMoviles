@@ -127,11 +127,23 @@ fun CardProducto(
                     fontFamily = FontMontserratRegular
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "Emprendimiento: " + item.emprendimiento.name,
-                    fontSize = 12.sp,
-                    fontFamily = FontMontserratRegular
-                )
+
+                Box(
+                    modifier = Modifier
+                        .background(
+                            color = colorResource(id = R.color.celeste_fuerte).copy(alpha = 0.12f),
+                            shape = RoundedCornerShape(50)
+                        )
+                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                ) {
+                    Text(
+                        text = item.emprendimiento.name,
+                        fontSize = 11.sp,
+                        fontFamily = FontMontserratSemiBold,
+                        color = colorResource(id = R.color.azul_fuerte)
+                    )
+                }
+
 
                 /*Spacer(modifier = Modifier.height(12.dp))
                 GradientButtonProducto("Ver producto") {
@@ -145,32 +157,32 @@ fun CardProducto(
 
 // PRECIO + BOTÓN EN UNA FILA
 
-                    val precioFormateado = "$ %,d".format(item.producto.price)
+                val precioFormateado = "$ %,d".format(item.producto.price)
 
-                    Column {
-                        Text(
-                            text = "Precio",
-                            fontSize = 11.sp,
-                            fontFamily = FontMontserratRegular,
-                            color = Color.Gray
-                        )
+                Column {
+                    Text(
+                        text = "Precio",
+                        fontSize = 11.sp,
+                        fontFamily = FontMontserratRegular,
+                        color = Color.Gray
+                    )
 
-                        Text(
-                            text = precioFormateado,
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontMontserratBold,
-                            color = colorResource(id = R.color.azul_fuerte)
-                        )
-                    }
+                    Text(
+                        text = precioFormateado,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontMontserratBold,
+                        color = colorResource(id = R.color.azul_fuerte)
+                    )
+                }
                 Spacer(modifier = Modifier.height(6.dp))
 
-                    GradientButtonProducto {
-                        navController.navigate("productDetail/${item.producto.Id}")
-                    }
+                GradientButtonProducto {
+                    navController.navigate("productDetail/${item.producto.Id}")
                 }
-
             }
+
+        }
 
     }
 }

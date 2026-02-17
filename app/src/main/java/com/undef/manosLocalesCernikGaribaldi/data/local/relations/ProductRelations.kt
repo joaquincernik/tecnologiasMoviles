@@ -60,7 +60,7 @@ data class EmprendimientoConProductos(
 )
 
 // 4. Usuario con sus Productos Favoritos (Relación N:M)
-data class UsuarioConFavoritos(
+/*data class UsuarioConFavoritos(
     @Embedded val usuario: UsuariosEntity,
     @Relation(
         parentColumn = "Id",
@@ -73,3 +73,4 @@ data class UsuarioConFavoritos(
     )
     val productosFavoritos: List<ProductosEntity>
 )
+*/

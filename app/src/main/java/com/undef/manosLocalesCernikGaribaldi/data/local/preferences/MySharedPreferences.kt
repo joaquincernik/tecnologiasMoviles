@@ -8,15 +8,19 @@ class MySharedPreferences(context: Context) {
 
     private val storage: SharedPreferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 
-    fun saveLoginData(email: String, isLoggedIn: Boolean) {
+    fun saveLoginData(email: String, isLoggedIn: Boolean, id: Int) {
         storage.edit().apply {
             putString("user_email", email)
+            putInt("user_id", id)
             putBoolean("is_logged_in", isLoggedIn)
             apply()
         }
     }
 
     fun getEmail(): String? = storage.getString("user_email", null)
+
+    fun getId(): Int? = storage.getInt("user_id", 0)
+
     fun isLoggedIn(): Boolean = storage.getBoolean("is_logged_in", false)
 
     fun clear() {
