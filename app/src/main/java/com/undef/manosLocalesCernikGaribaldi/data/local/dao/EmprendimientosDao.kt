@@ -16,14 +16,30 @@ interface EmprendimientosDao {
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertEmprendimiento(emprendimiento: EmprendimientosEntity)
 
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
+    suspend fun insertAll(emprendimientos: List<EmprendimientosEntity>)
+
     @Update
     suspend fun updateEmprendimiento(emprendimiento: EmprendimientosEntity)
 
+    @Transaction
+    @Update
+    suspend fun updateAll(emprendimientos: List<EmprendimientosEntity>)
+
+    @Transaction
+    @Delete
+    suspend fun deleteAll(emprendimientos: List<EmprendimientosEntity>)
+
+    @Transaction
     @Delete
     suspend fun deleteEmprendimiento(emprendimiento: EmprendimientosEntity)
 
-    @Query("SELECT * FROM emprendimientos")
+    @Query("SELECT * FROM emprendimientos order by Id desc")
     fun getAllEmprendimientos(): LiveData<List<EmprendimientosEntity>>
+
+    @Query("SELECT * FROM emprendimientos order by Id desc")
+    fun getAllEmprendimientosOnce(): List<EmprendimientosEntity>
 
     @Query("SELECT * FROM emprendimientos WHERE Id = :id")
     suspend fun getEmprendimientoById(id: Int): EmprendimientosEntity?

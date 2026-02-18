@@ -32,9 +32,28 @@ interface ProductosDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(productos: List<ProductosEntity>)
+
+
+    @Transaction
+    @Update
+    suspend fun updateAll(productos: List<ProductosEntity>)
+
+    @Transaction
+    @Delete
+    suspend fun deleteAll(productos: List<ProductosEntity>)
+
+    @Transaction
+    @Query("SELECT * FROM productos order by Id desc")
+    fun getAllProductosConEmprendimiento(): LiveData<List<ProductoConEmprendimiento>>
+
     @Transaction
     @Query("SELECT * FROM productos")
-    fun getAllProductosConEmprendimiento(): LiveData<List<ProductoConEmprendimiento>>
+    fun getAllProductosConEmprendimientoOnce(): List<ProductoConEmprendimiento>
+
+
+    @Transaction
+    @Query("SELECT * FROM productos WHERE Id = :id")
+    suspend fun getProductoConEmprendimiento(id: Int): ProductoConEmprendimiento
 
     @Transaction
     @Query("SELECT * FROM productos WHERE Id = :id")
@@ -42,4 +61,8 @@ interface ProductosDao {
 
     @Insert(onConflict = OnConflictStrategy.Companion.IGNORE)
     suspend fun insertProductCategoryCrossRef(crossRef: ProductCategoryCrossRef)
+
+    @Query("SELECT * FROM productos")
+    suspend fun getAllProductsSync(): List<ProductosEntity>
 }
+

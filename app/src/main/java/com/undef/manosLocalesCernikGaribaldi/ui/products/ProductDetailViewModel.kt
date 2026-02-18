@@ -1,16 +1,13 @@
 package com.undef.manosLocalesCernikGaribaldi.ui.products
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
-import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
 import com.undef.manosLocalesCernikGaribaldi.data.repository.ProductosRepository
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class ProductDetailViewModel : ViewModel(){
@@ -22,7 +19,7 @@ class ProductDetailViewModel : ViewModel(){
 
     fun loadProduct(productId: Int) {
         viewModelScope.launch {
-            _producto.value = repository.fetchProducto(productId)
+            _producto.value = repository.getProductoById(productId)
 
         }
     }

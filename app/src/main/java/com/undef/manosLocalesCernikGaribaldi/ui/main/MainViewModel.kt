@@ -10,6 +10,7 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.entities.FavoritosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
 import com.undef.manosLocalesCernikGaribaldi.data.repository.EmprendimientosRepository
 import com.undef.manosLocalesCernikGaribaldi.data.repository.FavoritosRepository
+import com.undef.manosLocalesCernikGaribaldi.data.repository.ProductosRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -27,10 +28,14 @@ class MainViewModel : ViewModel() {
     val favoritosDao = MyApplication.myAppDatabase.favoritosDao()
     val favoritosRepository = FavoritosRepository(favoritosDao)
 
+    //quiero que se refresquen los productos tambien
+    //val productosDao = MyApplication.myAppDatabase.productosDao()
+    //val productosRepository = ProductosRepository(RetrofitClient.apiService, productosDao)
+
     init {
         // Disparamos la actualización en segundo plano
         viewModelScope.launch {
-           // emprendimientosRepository.refreshEmprendimientos()
+            emprendimientosRepository.refreshEmprendimientos()
         }
     }
 

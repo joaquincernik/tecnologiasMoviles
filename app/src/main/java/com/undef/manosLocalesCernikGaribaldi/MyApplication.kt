@@ -27,7 +27,7 @@ class MyApplication: Application() {
         super.onCreate()
         preferences = MySharedPreferences(applicationContext)
         myApplcationContext = applicationContext
-        myAppDatabase = MyAppRoomDatabase.roomDatabase
+        myAppDatabase = MyAppRoomDatabase.getDatabase(this)
 
         //myAppDatabase = MyAppRoomDatabase.getDatabase(applicationContext)
 

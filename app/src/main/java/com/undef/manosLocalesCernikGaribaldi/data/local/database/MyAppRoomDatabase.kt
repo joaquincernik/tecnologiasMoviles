@@ -1,5 +1,6 @@
 package com.undef.manosLocalesCernikGaribaldi.data.local.database
 
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -36,10 +37,21 @@ abstract class MyAppRoomDatabase : RoomDatabase() {
     abstract fun favoritosDao(): FavoritosDao
 
     companion object {
-        val roomDatabase: MyAppRoomDatabase = Room.databaseBuilder(
-            MyApplication.myApplcationContext,
-            MyAppRoomDatabase::class.java,
-            "com.undef.manoslocalescernikgaribaldi.database"
-        ).build()
+        @Volatile
+        private var INSTANCE: MyAppRoomDatabase? = null
+
+        fun getDatabase(context: Context): MyAppRoomDatabase {
+            // Si la instancia ya existe, la devuelve. Si no, la crea de forma sincronizada.
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    MyAppRoomDatabase::class.java,
+                    "manos_locales_db" // Usa un nombre fijo y simple
+                )
+                    .build()
+                INSTANCE = instance
+                instance
+            }
+        }
     }
 }
