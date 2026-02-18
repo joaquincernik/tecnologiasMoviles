@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrainsKotlinSerialization)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
     id("kotlin-parcelize")
 }
 
@@ -48,7 +49,7 @@ android {
 dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
-    implementation ("androidx.navigation:navigation-compose:2.9.0")
+    //implementation ("androidx.navigation:navigation-compose:2.9.0")
     implementation ("androidx.compose.material:material:1.6.1")
     implementation ("androidx.compose.runtime:runtime-livedata:1.7.5")
     implementation("androidx.fragment:fragment-ktx:1.8.5")
@@ -77,6 +78,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+
+    //iny dependencias
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+
 
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
