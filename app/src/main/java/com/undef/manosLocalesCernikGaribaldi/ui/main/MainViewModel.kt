@@ -28,13 +28,10 @@ class MainViewModel : ViewModel() {
     val favoritosDao = MyApplication.myAppDatabase.favoritosDao()
     val favoritosRepository = FavoritosRepository(favoritosDao)
 
-    //quiero que se refresquen los productos tambien
-    //val productosDao = MyApplication.myAppDatabase.productosDao()
-    //val productosRepository = ProductosRepository(RetrofitClient.apiService, productosDao)
 
     init {
         // Disparamos la actualización en segundo plano
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             emprendimientosRepository.refreshEmprendimientos()
         }
     }

@@ -1,6 +1,5 @@
 package com.undef.manosLocalesCernikGaribaldi.ui.emprendimientos
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,12 +18,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,61 +38,59 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import coil.compose.SubcomposeAsyncImage
 import com.undef.manosLocalesCernikGaribaldi.R
-import com.undef.manosLocalesCernikGaribaldi.ui.products.Product
+import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.relations.EmprendimientoConProductos
 import com.undef.manosLocalesCernikGaribaldi.utils.components.BottomBar
-import com.undef.manosLocalesCernikGaribaldi.utils.components.CardProducto
-import com.undef.manosLocalesCernikGaribaldi.utils.components.Categoria
-import com.undef.manosLocalesCernikGaribaldi.utils.components.Emprendimientos
+import com.undef.manosLocalesCernikGaribaldi.utils.components.CardProductoEnEmprendimiento
 import com.undef.manosLocalesCernikGaribaldi.utils.components.TopBar
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratBold
 import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratRegular
 
 
 @Composable
-@Preview
-fun TopBarPrev() {
-    EmprendimientoDetailScreen(rememberNavController())
-}
-
-@Composable
-fun EmprendimientoDetailScreen(navController: NavHostController) {
+fun EmprendimientoDetailScreen(
+    navController: NavHostController,
+    viewModel: EmprendimientoDetailViewModel = EmprendimientoDetailViewModel(),
+    id: Int
+) {
     var selectedIndex by remember {
         mutableIntStateOf(0)
     }
+    // Cargamos los datos al entrar
+    LaunchedEffect(id) {
+        viewModel.loadEmprendimiento(id)
+    }
+
+    val detalle by viewModel.emprendimiento.observeAsState()
 
     //momentaneo
-    val listaCategorias: MutableList<Categoria> = mutableListOf(Categoria.MATE, Categoria.REGIONAL)
-    val emprendimientoPrueba = Emprendimientos(
-        "Entre amigos",
-        painterResource(R.drawable.emprendimientologo),
-        "Es reconocido por su durabilidad, resistencia y capacidad de conservar la temperatura gracias a su construcción de acero inoxidable con aislamiento al vacío.Los termos Stanley son populares entre aventureros, trabajadores de campo y personas que necesitan mantener sus bebidas a la temperatura ideal durante todo el día. ",
-        listaCategorias
-    )
+//    val listaCategorias: MutableList<Categoria> = mutableListOf(Categoria.MATE, Categoria.REGIONAL)
+
     Scaffold(
         topBar = { TopBar(navController) },
         bottomBar = {
             BottomBar(selectedIndex, navController)
         }
     ) { innerPadding ->
-        ContentEmprendimiento(Modifier.padding(innerPadding), navController, emprendimientoPrueba)
+        detalle?.let { emprendimiento ->
+            ContentEmprendimiento(Modifier.padding(innerPadding), navController, emprendimiento)
+
+        }
     }
 }
-
 
 
 @Composable
 fun ContentEmprendimiento(
     modifier: Modifier,
     navController: NavHostController,
-    emprendimiento: Emprendimientos
+    emprendimiento: EmprendimientoConProductos
 ) {
 
     Column(
@@ -108,11 +108,27 @@ fun ContentEmprendimiento(
                 .height(220.dp)
         ) {
             // Imagen que rellena la Box completamente
-            Image(
-                painter = painterResource(R.drawable.fondomates),
-                contentDescription = "Imagen de producto",
+            SubcomposeAsyncImage(
+                model = emprendimiento.emprendimiento.photoUrl, //acordate que imagen es un painter
+                contentDescription = emprendimiento.emprendimiento.name,
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop // para que se recorte proporcionalmente
+                contentScale = ContentScale.Crop, // esto es para que no se corte la imagen, sino queda mal
+                loading = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                },
+                error = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("Error al cargar")
+                    }
+                }
             )
             // Filtro oscuro encima
             Box(
@@ -137,8 +153,9 @@ fun ContentEmprendimiento(
 
             ) {
 
-                Column(modifier = Modifier.fillMaxWidth()
-                    ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Row(
                         modifier = Modifier
                             .padding(8.dp),
@@ -146,13 +163,30 @@ fun ContentEmprendimiento(
 
                     ) {
                         //imagen de circulo
-                        Image(
-                            painter = emprendimiento.imagen, //acordate que imagen es un painter
-                            contentDescription = emprendimiento.nombre,
+
+                        SubcomposeAsyncImage(
+                            model = emprendimiento.emprendimiento.photoUrl, //acordate que imagen es un painter
+                            contentDescription = emprendimiento.emprendimiento.name,
                             modifier = Modifier
                                 .size(115.dp)
                                 .clip(CircleShape),
-                            contentScale = ContentScale.Crop // esto es para que no se corte la imagen, sino queda mal
+                            contentScale = ContentScale.Crop, // esto es para que no se corte la imagen, sino queda mal
+                            loading = {
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    CircularProgressIndicator()
+                                }
+                            },
+                            error = {
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text("Error al cargar")
+                                }
+                            }
                         )
 
                         Spacer(modifier = Modifier.width(12.dp)) // ES PARA SEPARAR ELEMENTOS
@@ -161,12 +195,12 @@ fun ContentEmprendimiento(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text(
-                                text = emprendimiento.nombre,
+                                text = emprendimiento.emprendimiento.name,
                                 fontSize = 22.sp,
                                 fontFamily = FontMontserratBold,
                             )
                             Text(
-                                text = "Villa Carlos Paz",
+                                text = emprendimiento.emprendimiento.location,
                                 fontSize = 14.sp,
                                 fontFamily = FontMontserratRegular,
                                 modifier = Modifier.padding(top = 2.dp)
@@ -199,7 +233,11 @@ fun ContentEmprendimiento(
                     )
 
                     // Contenido de productos
-                    ContentProducts(navController = navController)
+                    ContentProducts(
+                        navController = navController,
+                        emprendimiento.productos,
+                        emprendimiento.emprendimiento.name
+                    )
                 }
             }
 
@@ -209,13 +247,16 @@ fun ContentEmprendimiento(
 
 
 @Composable
-fun ContentProducts(navController: NavHostController) {
+fun ContentProducts(
+    navController: NavHostController,
+    listaProductos: List<ProductosEntity>,
+    name: String
+) {
     var textSearch by remember { mutableStateOf(TextFieldValue("")) }
-    val listaProductos = Product.getProductList()
 
     //ahora lo filtramos
     val listaProductosFiltrados = listaProductos.filter {
-        it.nombre.contains(textSearch.text, ignoreCase = true)
+        it.name.contains(textSearch.text, ignoreCase = true)
     }
 
     Column(
@@ -244,15 +285,16 @@ fun ContentProducts(navController: NavHostController) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(500.dp) ,
+                .height(500.dp),
             content = {
                 itemsIndexed(listaProductosFiltrados, itemContent = { index, item ->
-                    /*CardProducto(
+                    CardProductoEnEmprendimiento(
                         item,
-                        navController,
-                        esconderEmprendimiento = true
+                        name,
+                        navController
                     )//vamos a mostrar por pantalla los emprendimientos en la funcion definida mas abajo "Emprendimiento"
-               */ })
+
+                })
             })
 
     }

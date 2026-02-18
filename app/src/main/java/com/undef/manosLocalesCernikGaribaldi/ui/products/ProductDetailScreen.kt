@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -88,66 +90,69 @@ fun ProductDetailScreen(navController: NavHostController, productId: Int, viewMo
             }
         }}
 }
-
 @Composable
-fun ContentProduct(modifier: Modifier, product: ProductoConEmprendimiento, navController: NavHostController) {
-    Column(
-        modifier
-            .fillMaxWidth()
-            .background(
-                color = colorResource(R.color.blanquito),
-            )
+fun ContentProduct(
+    modifier: Modifier,
+    product: ProductoConEmprendimiento,
+    navController: NavHostController
+) {
+
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .background(colorResource(R.color.blanquito)),
+        contentPadding = PaddingValues(bottom = 24.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(325.dp)
-        ) {
-            // Imagen que rellena la Box completamente
 
-            SubcomposeAsyncImage(
-                model = product.producto.photoUrl, //acordate que imagen es un painter
-                contentDescription = product.producto.name,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop, // esto es para que no se corte la imagen, sino queda mal
-                loading = {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
+        // 🔹 Imagen
+        item {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(325.dp)
+            ) {
+                SubcomposeAsyncImage(
+                    model = product.producto.photoUrl,
+                    contentDescription = product.producto.name,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop,
+                    loading = {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    },
+                    error = {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("Error al cargar")
+                        }
                     }
-                },
-                error = {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text("Error al cargar")
-                    }
-                }
-            )
-
+                )
+            }
         }
 
-        // Box blanca con borde redondeado arriba
-        Box(
-            modifier = Modifier
-                .offset(y = (-20.dp))
-                .fillMaxSize()
-                .clip(RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)) // <-- CLIP necesario
-                .background(
-                    color = Color.White,
-                )
-                .padding(start = 24.dp, end = 24.dp, top = 30.dp) // padding interior del contenido
-        ) {
-            Column( modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-
+        // 🔹 Contenido blanco
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = Color.White,
+                        shape = RoundedCornerShape(
+                            topStart = 18.dp,
+                            topEnd = 18.dp
+                        )
+                    )
+                    .padding(horizontal = 24.dp, vertical = 30.dp)
             ) {
+
                 Text(
-                    text = "Mate ${product.producto.name}",
+                    text = product.producto.name,
                     fontFamily = FontMontserratBold,
                     fontSize = 22.sp,
                     color = Color.Black
@@ -168,15 +173,16 @@ fun ContentProduct(modifier: Modifier, product: ProductoConEmprendimiento, navCo
                     text = product.producto.description,
                     fontFamily = FontMontserratRegular,
                     color = Color.DarkGray,
-                    lineHeight = 24.sp // Aquí defines el line height
+                    lineHeight = 24.sp
                 )
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-                GradientButtonDetail("Contactar ${product.emprendimiento.name}") { }
+                GradientButtonDetail(
+                    text = "Contactar ${product.emprendimiento.name}"
+                ) { }
 
-                Spacer(modifier = Modifier.height(14.dp))
-
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }

@@ -20,7 +20,7 @@ class NotificationHelper(private val context: Context) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             ).apply {
                 description = "Notificaciones de nuevos productos de favoritos"
             }
@@ -34,7 +34,8 @@ class NotificationHelper(private val context: Context) {
             .setSmallIcon(R.drawable.ic_launcher_foreground) // Asegúrate de tener un icono aquí
             .setContentTitle("¡Nuevos Productos!")
             .setContentText("Se han agregado nuevos productos de $name.")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setDefaults(NotificationCompat.DEFAULT_ALL) // Activa sonido y vibración por defecto
             .setAutoCancel(true)
 
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

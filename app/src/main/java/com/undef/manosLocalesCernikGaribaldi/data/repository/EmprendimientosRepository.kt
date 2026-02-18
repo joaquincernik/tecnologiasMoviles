@@ -2,14 +2,13 @@ package com.undef.manosLocalesCernikGaribaldi.data.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.undef.manosLocalesCernikGaribaldi.MyApplication
 import com.undef.manosLocalesCernikGaribaldi.data.local.dao.EmprendimientosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.relations.EmprendimientoConProductos
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.ApiService
-import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.EmprendimientoDTO
+import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.EmprendimientoDTO
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
-import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.toEntity
-import com.undef.manosLocalesCernikGaribaldi.utils.NotificationHelper
+import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.toEntity
 
 class EmprendimientosRepository(
     private val api: ApiService,
@@ -57,5 +56,7 @@ class EmprendimientosRepository(
 
     }
 
-
+    suspend fun getEmprendimientoConProductos(id: Int): EmprendimientoConProductos? {
+        return dao.getEmprendimientoConProductos(id)
+    }
 }

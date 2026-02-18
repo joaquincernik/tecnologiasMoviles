@@ -10,6 +10,7 @@ import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.repository.UsuariosRepository
 import com.undef.manosLocalesCernikGaribaldi.ui.login.LoginUiState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SignUpViewModel : ViewModel() {

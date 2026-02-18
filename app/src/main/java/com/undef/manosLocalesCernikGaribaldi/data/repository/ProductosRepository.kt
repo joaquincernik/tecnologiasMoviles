@@ -1,14 +1,13 @@
 package com.undef.manosLocalesCernikGaribaldi.data.repository
 
 import android.util.Log
-import androidx.compose.foundation.layout.size
 import androidx.lifecycle.LiveData
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
 import com.undef.manosLocalesCernikGaribaldi.data.local.dao.ProductosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.ApiService
-import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.ProductoDTO
-import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.toEntity
+import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.ProductoDTO
+import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.toEntity
 import com.undef.manosLocalesCernikGaribaldi.utils.NotificationHelper
 
 class ProductosRepository(

@@ -21,9 +21,26 @@ fun NavigationCenter(navController: NavHostController) {
         composable("home") { HomeScreen(navController) }
         composable("products") { ProductsScreen(navController) }
         composable("profile") { ProfileScreen(navController) }
-        composable("editarPreferencias"){ EditarPreferenciasScreen(navController) }
-        composable("emprendimientoDetail") { EmprendimientoDetailScreen(navController) }
-        composable("editarPerfilScreen"){ EditarPerfilScreen(navController) }
+        composable("editarPreferencias") { EditarPreferenciasScreen(navController) }
+        composable("editarPerfilScreen") { EditarPerfilScreen(navController) }
+
+        //detail de emprendimiento
+        composable(
+            route = "emprendimientoDetail/{emprendimientoId}",
+            arguments = listOf(
+                navArgument("emprendimientoId") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+
+            val emprendimientoId = backStackEntry.arguments?.getInt("emprendimientoId") ?: 0
+
+            EmprendimientoDetailScreen(
+                id = emprendimientoId,
+                navController = navController
+            )
+        }
+
+        //detail de producto
         composable(
             route = "productDetail/{productId}",
             arguments = listOf(

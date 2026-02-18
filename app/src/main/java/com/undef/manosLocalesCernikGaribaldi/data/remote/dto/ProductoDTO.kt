@@ -1,7 +1,6 @@
-package com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit
+package com.undef.manosLocalesCernikGaribaldi.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
-import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 
 data class ProductoDTO(
