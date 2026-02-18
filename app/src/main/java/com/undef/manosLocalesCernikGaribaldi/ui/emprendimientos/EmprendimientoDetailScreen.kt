@@ -1,5 +1,9 @@
 package com.undef.manosLocalesCernikGaribaldi.ui.emprendimientos
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +22,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -46,6 +51,7 @@ import coil.compose.SubcomposeAsyncImage
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.EmprendimientoConProductos
+import com.undef.manosLocalesCernikGaribaldi.ui.products.GradientButtonDetail
 import com.undef.manosLocalesCernikGaribaldi.utils.components.BottomBar
 import com.undef.manosLocalesCernikGaribaldi.utils.components.CardProductoEnEmprendimiento
 import com.undef.manosLocalesCernikGaribaldi.utils.components.TopBar
@@ -93,6 +99,8 @@ fun ContentEmprendimiento(
     navController: NavHostController,
     emprendimiento: EmprendimientoConProductos
 ) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+
 
     Column(
         modifier
@@ -211,7 +219,19 @@ fun ContentEmprendimiento(
                         //fin de el icono y eso
                     }
                     // Línea degradada (border bottom)
-                    Box(
+                    Spacer(modifier = Modifier.height(6.dp)) // ES PARA SEPARAR ELEMENTOS
+
+                    GradientButtonDetail(
+                        text = "WhatsApp ${emprendimiento.emprendimiento.name}",
+                    ) {
+                        // Asegúrate de que tu entidad EmprendimientosEntity tenga el campo 'phone' o 'telefono'
+                        compartirWpp(
+                            context = context,
+                            telefono = "+543644356502", // Cambia por el nombre real de tu campo
+
+                        )
+                    }
+                   /* Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(1.dp)
@@ -225,6 +245,7 @@ fun ContentEmprendimiento(
                                 )
                             )
                     )
+*/
                     // Título de productos
                     Text(
                         text = "Productos",
@@ -262,7 +283,9 @@ fun ContentProducts(
 
     Column(
 
-        modifier = Modifier.fillMaxWidth().background(Color.White)
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White)
     ) {
         OutlinedTextField(
             value = textSearch,
@@ -284,6 +307,7 @@ fun ContentProducts(
             )
         )
 
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -299,5 +323,21 @@ fun ContentProducts(
                 })
             })
 
+    }
+}
+fun compartirWpp(context: Context, telefono: String) {
+    // Limpiamos el teléfono (solo números)
+    val numeroLimpio = telefono.replace(" ", "").replace("+", "").replace("-", "")
+    val mensaje = "Hola! Vi tu producto en la app Manos Locales "
+
+    // Creamos el URI para WhatsApp
+    val uri = Uri.parse("https://wa.me/$telefono?text=${Uri.encode(mensaje)}")
+
+    val intent = Intent(Intent.ACTION_VIEW, uri)
+
+    try {
+        context.startActivity(intent)
+    } catch (e: Exception) {
+        Toast.makeText(context, "WhatsApp no está instalado", Toast.LENGTH_SHORT).show()
     }
 }
