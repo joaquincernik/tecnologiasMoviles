@@ -1,5 +1,10 @@
 package com.undef.manosLocalesCernikGaribaldi.ui.products
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,6 +40,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,22 +65,26 @@ import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
 
 */
 @Composable
-fun ProductDetailScreen(navController: NavHostController, productId: Int, viewModel: ProductDetailViewModel = viewModel() ) {
+fun ProductDetailScreen(
+    navController: NavHostController,
+    productId: Int,
+    viewModel: ProductDetailViewModel = viewModel()
+) {
     //cuando cambie product id se ejecuta este bloque
     LaunchedEffect(productId) {
         viewModel.loadProduct(productId)
     }
 
     val producto = viewModel.producto.observeAsState()
-
     //esto es para el bototm bar
     var selectedIndex by remember {
         mutableIntStateOf(0)
     }
 
     Scaffold(
+        containerColor = Color.White,
         topBar = { TopBar(navController) },
-        bottomBar = { BottomBar(selectedIndex,navController) }
+        bottomBar = { BottomBar(selectedIndex, navController) }
     ) { innerPadding ->
         // Si el producto ya cargó, mostramos el contenido
         producto.value?.let { item ->
@@ -88,14 +98,17 @@ fun ProductDetailScreen(navController: NavHostController, productId: Int, viewMo
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text("Cargando producto...")
             }
-        }}
+        }
+    }
 }
+
 @Composable
 fun ContentProduct(
     modifier: Modifier,
     product: ProductoConEmprendimiento,
     navController: NavHostController
 ) {
+    val context = androidx.compose.ui.platform.LocalContext.current
 
     LazyColumn(
         modifier = modifier
@@ -179,15 +192,21 @@ fun ContentProduct(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 GradientButtonDetail(
-                    text = "Contactar ${product.emprendimiento.name}"
-                ) { }
+                    text = "Contactar ${product.emprendimiento.name}",
+
+                    ) {
+                    enviarMailProveedor(
+                        context = context,
+                        email = product.emprendimiento.name, // Asegúrate que el campo existe en tu entidad
+                        productoNombre = product.producto.name
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
 }
-
 
 
 @Composable
@@ -218,6 +237,27 @@ fun GradientButtonDetail(
             fontSize = 14.sp,
             fontFamily = FontMontserratSemiBold
         )
+    }
+}
+
+fun enviarMailProveedor(context: Context, email: String, productoNombre: String) {
+    val intent = Intent(Intent.ACTION_SENDTO).apply {
+        data = Uri.parse("mailto:") // Solo apps de email manejarán esto
+        val nombreFormat = email.trim().lowercase().replace(" ", "")
+        val mailFormado = "$nombreFormat@gmail.com"
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(mailFormado))
+        putExtra(Intent.EXTRA_SUBJECT, "Consulta por producto: $productoNombre")
+        putExtra(
+            Intent.EXTRA_TEXT,
+            "Hola, $email me interesa obtener más información sobre $productoNombre."
+        )
+    }
+
+    try {
+        5
+        context.startActivity(intent)
+    } catch (e: Exception) {
+        Toast.makeText(context, "No tienes una app de correo instalada", Toast.LENGTH_SHORT).show()
     }
 }
 

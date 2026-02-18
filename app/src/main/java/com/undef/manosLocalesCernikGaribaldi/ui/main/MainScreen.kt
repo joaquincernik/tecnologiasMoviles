@@ -1,5 +1,6 @@
 package com.undef.manosLocalesCernikGaribaldi.ui.main
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
@@ -56,6 +57,7 @@ fun HomeScreen(navController: NavHostController, viewModel: MainViewModel = view
         mutableIntStateOf(0)
     }
     Scaffold(
+        containerColor = Color.White,
         topBar = { TopBar(navController = navController, arrowInvisible = true) },
         bottomBar = { BottomBar(selectedIndex, navController) }
 
@@ -91,6 +93,7 @@ fun Content(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(color = Color.White)
     ) {
 
         //buscador por nombre
@@ -117,7 +120,9 @@ fun Content(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
+                .background(color = Color.White)
                 .weight(1f),
+
             content = {
                 itemsIndexed(listaFiltrada, itemContent = { index, item ->
                     CardEmprendimiento(

@@ -73,6 +73,7 @@ fun EmprendimientoDetailScreen(
 //    val listaCategorias: MutableList<Categoria> = mutableListOf(Categoria.MATE, Categoria.REGIONAL)
 
     Scaffold(
+        containerColor = Color.White,
         topBar = { TopBar(navController) },
         bottomBar = {
             BottomBar(selectedIndex, navController)
@@ -260,7 +261,8 @@ fun ContentProducts(
     }
 
     Column(
-        modifier = Modifier.fillMaxWidth()
+
+        modifier = Modifier.fillMaxWidth().background(Color.White)
     ) {
         OutlinedTextField(
             value = textSearch,

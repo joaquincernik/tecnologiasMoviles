@@ -59,6 +59,7 @@ fun ProfileScreen(navController: NavHostController, viewModel: ProfileViewModel 
         mutableIntStateOf(2)
     }
     Scaffold(
+        containerColor = Color.White,
         topBar = { TopBar(navController = navController, arrowInvisible = true) },
         bottomBar = { BottomBar(selectedIndex, navController) }
 
@@ -88,6 +89,7 @@ fun Profile(
             .fillMaxSize()
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
+            .background(color = Color.White)
 
     ) {
         // Usamos los datos reales. Si 'user' es null (mientras carga), ponemos placeholders
