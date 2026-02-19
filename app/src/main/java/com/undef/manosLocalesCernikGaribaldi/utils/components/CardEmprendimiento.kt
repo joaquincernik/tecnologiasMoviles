@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.SubcomposeAsyncImage
@@ -55,7 +56,7 @@ import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
 fun CardEmprendimiento(
     item: EmprendimientosEntity,
     navController: NavHostController,
-    viewModel: MainViewModel = viewModel()
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     // Observamos si este emprendimiento en particular es favorito
     val esFavorito by viewModel.isFavorito(item.Id).observeAsState(initial = false)
