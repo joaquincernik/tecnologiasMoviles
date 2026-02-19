@@ -10,7 +10,6 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.dao.FavoritosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.FavoritosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.preferences.MySharedPreferences
-import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
 import com.undef.manosLocalesCernikGaribaldi.data.repository.EmprendimientosRepository
 import com.undef.manosLocalesCernikGaribaldi.data.repository.FavoritosRepository
 import com.undef.manosLocalesCernikGaribaldi.data.repository.ProductosRepository

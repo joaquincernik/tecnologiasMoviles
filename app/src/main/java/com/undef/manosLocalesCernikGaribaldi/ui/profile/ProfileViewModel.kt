@@ -9,7 +9,6 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.preferences.MySharedPreferences
 import com.undef.manosLocalesCernikGaribaldi.data.repository.UsuariosRepository
 import com.undef.manosLocalesCernikGaribaldi.data.repository.EmprendimientosRepository
-import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

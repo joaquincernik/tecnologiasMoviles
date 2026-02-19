@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 @HiltAndroidApp
 class MyApplication: Application()
 /*{
-
+despues de inyeccion de dependencias todo desaparece
     companion object {
         lateinit var preferences: MySharedPreferences
         lateinit var myApplcationContext: Context

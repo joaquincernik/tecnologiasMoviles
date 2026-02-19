@@ -9,7 +9,6 @@ import com.undef.manosLocalesCernikGaribaldi.MyApplication
 import com.undef.manosLocalesCernikGaribaldi.data.local.dao.EmprendimientosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.EmprendimientoConProductos
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento
-import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
 import com.undef.manosLocalesCernikGaribaldi.data.repository.EmprendimientosRepository
 import com.undef.manosLocalesCernikGaribaldi.data.repository.ProductosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento
-import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
 import com.undef.manosLocalesCernikGaribaldi.data.repository.ProductosRepository
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel

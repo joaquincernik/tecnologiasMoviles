@@ -7,7 +7,6 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.entities.Emprendimientos
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.EmprendimientoConProductos
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.ApiService
 import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.EmprendimientoDTO
-import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
 import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.toEntity
 import javax.inject.Inject
 
