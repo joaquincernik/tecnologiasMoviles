@@ -3,30 +3,31 @@ package com.undef.manosLocalesCernikGaribaldi.data.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
+import com.undef.manosLocalesCernikGaribaldi.data.local.dao.FavoritosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.dao.ProductosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.ApiService
 import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.ProductoDTO
 import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.toEntity
 import com.undef.manosLocalesCernikGaribaldi.utils.NotificationHelper
+import javax.inject.Inject
 
-class ProductosRepository(
+class ProductosRepository @Inject constructor(
     private val api: ApiService,
-    private val dao: ProductosDao
+    private val dao: ProductosDao,
+    private val favoritosRepository: FavoritosRepository,
+    private val usuariosRepository: UsuariosRepository,
+    private val notificationHelper: NotificationHelper
 ) {
     val allProductos: LiveData<List<ProductoConEmprendimiento>> =
         dao.getAllProductosConEmprendimiento()
 
 
     // Instanciamos el helper usando el context de la aplicación
-    private val notificationHelper = NotificationHelper(MyApplication.myApplcationContext)
 
 
     suspend fun refreshProductos() {
         try {
-
-            val favoritosRepository =
-                FavoritosRepository(MyApplication.myAppDatabase.favoritosDao())
 
 
             val response = this.fetchProductos()
@@ -42,7 +43,7 @@ class ProductosRepository(
 
             if (nuevos.isNotEmpty()) {
                 dao.insertAll(nuevos)
-                val userId = MyApplication.preferences.getId() ?: -1
+                val userId = usuariosRepository.getSessionId() ?: -1
                 nuevos.forEach {
                     val productoConEmprendimiento = dao.getProductoConEmprendimiento(it.Id)
                     if (favoritosRepository.isFavoritoSync(

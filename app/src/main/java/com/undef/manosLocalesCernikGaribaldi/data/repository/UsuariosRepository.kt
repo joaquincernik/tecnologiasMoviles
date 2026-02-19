@@ -3,15 +3,20 @@ package com.undef.manosLocalesCernikGaribaldi.data.repository
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
 import com.undef.manosLocalesCernikGaribaldi.data.local.dao.UsuariosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.preferences.MySharedPreferences
+import javax.inject.Inject
 
-class UsuariosRepository(private val usuariosDao: UsuariosDao) {
+class UsuariosRepository @Inject constructor(
+    private val usuariosDao: UsuariosDao,
+    private val sharedPreferences: MySharedPreferences
+) {
 
     //el repository decide de donde vienen los datos
     suspend fun checkUser(email: String, pass: String): UsuariosEntity? {
         return usuariosDao.login(email, pass)
     }
 
-    suspend fun registerUser(usuario: UsuariosEntity) : Int {
+    suspend fun registerUser(usuario: UsuariosEntity): Int {
         return usuariosDao.insertUsuario(usuario).toInt()
     }
 
@@ -19,9 +24,28 @@ class UsuariosRepository(private val usuariosDao: UsuariosDao) {
         return usuariosDao.getUsuarioByEmail(email)
     }
 
-    suspend fun saveSession(email: String,id: Int) {
+    //shared preferences ------------
+    fun saveSession(email: String, id: Int) {
         // Usamos la instancia global que definimos en MyApplication
-        MyApplication.Companion.preferences.saveLoginData(email, true, id)}
+        sharedPreferences.saveLoginData(email, true, id)
+    }
+
+    fun checkSession(): Boolean {
+        return sharedPreferences.isLoggedIn()
+    }
+
+    fun getSessionEmail(): String? {
+        return sharedPreferences.getEmail()
+    }
+
+    fun getSessionId(): Int? {
+        return sharedPreferences.getId()
+    }
+
+
+    fun logout() {
+        sharedPreferences.clear()
+    }
 
 
 }

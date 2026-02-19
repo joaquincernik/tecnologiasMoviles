@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -47,7 +48,7 @@ fun Prev() {
 }
 
 @Composable
-fun HomeScreen(navController: NavHostController, viewModel: MainViewModel = viewModel()) {
+fun HomeScreen(navController: NavHostController, viewModel: MainViewModel = hiltViewModel()) {
 
     // Convertimos el LiveData del ViewModel en un Estado de Compose
     val listaEmprendimientos by viewModel.listaEmprendimientos.observeAsState(initial = emptyList())

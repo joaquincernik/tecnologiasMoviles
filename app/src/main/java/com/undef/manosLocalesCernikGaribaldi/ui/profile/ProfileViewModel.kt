@@ -6,16 +6,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.preferences.MySharedPreferences
 import com.undef.manosLocalesCernikGaribaldi.data.repository.UsuariosRepository
 import com.undef.manosLocalesCernikGaribaldi.data.repository.EmprendimientosRepository
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProfileViewModel : ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val repository: UsuariosRepository,
+) : ViewModel() {
     private val _user = MutableLiveData<UsuariosEntity?>()
     val user: LiveData<UsuariosEntity?> = _user
-    val userDao = MyApplication.myAppDatabase.usuariosDao()
-    val repository = UsuariosRepository(userDao)
 
     //el init es un bloque de inicializacion, se ejecuta cuando se crea la instancia de la clase
     init {
@@ -24,21 +28,17 @@ class ProfileViewModel : ViewModel() {
     }
 
     private fun loadUserData() {
-        val email = MyApplication.preferences.getEmail()
+        val email = repository.getSessionEmail()
         if (email != null) {
             viewModelScope.launch {
                 val user = repository.getUserByEmail(email)
                 _user.value = user
-
-                //-----------
-//                erepository.refreshEmprendimientos()
-
             }
         }
     }
 
     fun logout() {
-        MyApplication.preferences.clear()
+        repository.logout()
     }
 
 

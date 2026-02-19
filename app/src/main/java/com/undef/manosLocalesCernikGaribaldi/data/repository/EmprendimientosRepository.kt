@@ -9,14 +9,16 @@ import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.ApiService
 import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.EmprendimientoDTO
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
 import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.toEntity
+import javax.inject.Inject
 
-class EmprendimientosRepository(
-    private val api: ApiService,
-    private val dao: EmprendimientosDao
-) {
+class EmprendimientosRepository @Inject constructor(
+private val api: ApiService,
+private val dao: EmprendimientosDao
+){
     //  LA FUENTE DE VERDAD:
     // Exponemos el LiveData del DAO.
     // Cualquier cambio en la DB se reflejará aquí automáticamente.
+
     val allEmprendimientos: LiveData<List<EmprendimientosEntity>> = dao.getAllEmprendimientos()
 
     suspend fun refreshEmprendimientos() {
@@ -52,7 +54,7 @@ class EmprendimientosRepository(
     }
 
     suspend fun fetchEmprendimientos(): List<EmprendimientoDTO> {
-        return RetrofitClient.apiService.getEmprendimientos()
+        return api.getEmprendimientos()
 
     }
 

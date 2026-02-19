@@ -7,22 +7,27 @@ import androidx.lifecycle.viewModelScope
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.repository.UsuariosRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel: ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    val repository: UsuariosRepository
+) : ViewModel() {
 
     //lo que la activity observara
     private val _uiState = MutableLiveData<LoginUiState>() //_ porque es privado
-    val uiState: LiveData<LoginUiState> get()  = _uiState //cuando acceda el valor de uistate obtengo el de _uistate
-    val userDao = MyApplication.myAppDatabase.usuariosDao()
-    val repository = UsuariosRepository(userDao)
+    val uiState: LiveData<LoginUiState> get() = _uiState //cuando acceda el valor de uistate obtengo el de _uistate
 
+    fun checkSession() : Boolean{
+        return repository.checkSession()
+    }
 
-
-    fun login(email:String, password:String) {
-    //validaciones simple
-        if(email.isEmpty() || password.isEmpty()) {
+    fun login(email: String, password: String) {
+        //validaciones simple
+        if (email.isEmpty() || password.isEmpty()) {
             _uiState.value = LoginUiState(errorMessage = "Completa todos los campos")
         }
 
@@ -31,21 +36,18 @@ class LoginViewModel: ViewModel() {
             _uiState.value = LoginUiState(isLoading = true)
 
             //busco en los usuarios
-            val user = repository.checkUser(email,password)
+            val user = repository.checkUser(email, password)
 
-            if(user!=null){
+            if (user != null) {
                 _uiState.value = LoginUiState(isSuccess = true)
                 //aca guardamos en la shared preference
                 repository.saveSession(email, user.Id)
-            }
-            else{
+            } else {
                 _uiState.value = LoginUiState(errorMessage = "Usuario o contraseña incorrectos")
 
             }
 
         }
-
-
 
     }
     /*

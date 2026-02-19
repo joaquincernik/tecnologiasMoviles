@@ -11,7 +11,7 @@ import com.undef.manosLocalesCernikGaribaldi.ui.main.PantallaPrincipalActivity
 
 
 class BienvenidoFragment : Fragment() {
-    private lateinit var binding: FragmentBienvenidoBinding
+/*    private lateinit var binding: FragmentBienvenidoBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,5 +38,5 @@ class BienvenidoFragment : Fragment() {
         }
     }
 
-
+*/
 }

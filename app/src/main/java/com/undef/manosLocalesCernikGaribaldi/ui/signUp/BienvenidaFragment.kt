@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.ui.login.LoginActivity
 import com.undef.manosLocalesCernikGaribaldi.databinding.FragmentBienvenidaBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 class BienvenidaFragment : Fragment() {

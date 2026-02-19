@@ -5,30 +5,40 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.undef.manosLocalesCernikGaribaldi.MyApplication
+import com.undef.manosLocalesCernikGaribaldi.data.local.dao.EmprendimientosDao
+import com.undef.manosLocalesCernikGaribaldi.data.local.dao.FavoritosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.FavoritosEntity
+import com.undef.manosLocalesCernikGaribaldi.data.local.preferences.MySharedPreferences
 import com.undef.manosLocalesCernikGaribaldi.data.remote.retrofit.RetrofitClient
 import com.undef.manosLocalesCernikGaribaldi.data.repository.EmprendimientosRepository
 import com.undef.manosLocalesCernikGaribaldi.data.repository.FavoritosRepository
 import com.undef.manosLocalesCernikGaribaldi.data.repository.ProductosRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val emprendimientosRepository: EmprendimientosRepository,
+    private val favoritosRepository: FavoritosRepository,
+    private val sharedPreferences: MySharedPreferences
+) : ViewModel() {
 
-    val emprendimientosDao = MyApplication.myAppDatabase.emprendimientosDao()
+   /* val emprendimientosDao = MyApplication.myAppDatabase.emprendimientosDao()
     val emprendimientosRepository =
         EmprendimientosRepository(RetrofitClient.apiService, emprendimientosDao)
-
+*/
     // Observamos la lista de Room. Room notificará automáticamente cuando la API guarde datos.
     val listaEmprendimientos: LiveData<List<EmprendimientosEntity>> =
         emprendimientosRepository.allEmprendimientos
 
     //favoritos
-    val favoritosDao = MyApplication.myAppDatabase.favoritosDao()
+/*    val favoritosDao = MyApplication.myAppDatabase.favoritosDao()
     val favoritosRepository = FavoritosRepository(favoritosDao)
 
-
+*/
     init {
         // Disparamos la actualización en segundo plano
         viewModelScope.launch(Dispatchers.IO) {
@@ -37,13 +47,13 @@ class MainViewModel : ViewModel() {
     }
 
     fun isFavorito(emprendimientoId: Int): LiveData<Boolean> {
-        val usuarioId = MyApplication.preferences.getId() ?: -1
+        val usuarioId = sharedPreferences.getId() ?: -1
         return favoritosRepository.isFavorito(usuarioId, emprendimientoId)
     }
 
     fun toggleFavorito(emprendimientoId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val usuarioId = MyApplication.preferences.getId() ?: return@launch
+            val usuarioId = sharedPreferences.getId() ?: return@launch
             val esFavoritoActual = favoritosRepository.isFavoritoSync(usuarioId, emprendimientoId)
 
             if (esFavoritoActual) {

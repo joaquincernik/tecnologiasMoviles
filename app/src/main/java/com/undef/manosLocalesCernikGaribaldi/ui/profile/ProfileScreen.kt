@@ -40,6 +40,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
@@ -50,7 +51,7 @@ import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
 
 
 @Composable
-fun ProfileScreen(navController: NavHostController, viewModel: ProfileViewModel = viewModel()) {
+fun ProfileScreen(navController: NavHostController, viewModel: ProfileViewModel = hiltViewModel()) {
     val context = LocalContext.current // Obtenemos el contexto de la Activity
     // Observamos el LiveData y lo convertimos a State de Compose
     val user by viewModel.user.observeAsState()

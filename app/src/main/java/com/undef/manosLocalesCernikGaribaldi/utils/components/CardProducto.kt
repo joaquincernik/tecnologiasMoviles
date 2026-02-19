@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.SubcomposeAsyncImage
-import com.undef.manosLocalesCernikGaribaldi.ui.products.Product
 import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento

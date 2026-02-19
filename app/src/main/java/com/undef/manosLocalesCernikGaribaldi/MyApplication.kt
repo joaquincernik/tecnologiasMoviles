@@ -5,10 +5,13 @@ import android.content.Context
 import com.undef.manosLocalesCernikGaribaldi.data.local.database.MyAppRoomDatabase
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.preferences.MySharedPreferences
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MyApplication: Application() {
+@HiltAndroidApp
+class MyApplication: Application()
+/*{
 
     companion object {
         lateinit var preferences: MySharedPreferences
@@ -33,4 +36,4 @@ class MyApplication: Application() {
 
 
     }
-}
+}*/

@@ -26,7 +26,7 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
         FavoritosEntity::class,
         ProductCategoryCrossRef::class
     ],
-    version = 1
+    version = 4
 )
 abstract class MyAppRoomDatabase : RoomDatabase() {
 
@@ -36,22 +36,4 @@ abstract class MyAppRoomDatabase : RoomDatabase() {
     abstract fun emprendimientosDao(): EmprendimientosDao
     abstract fun favoritosDao(): FavoritosDao
 
-    companion object {
-        @Volatile
-        private var INSTANCE: MyAppRoomDatabase? = null
-
-        fun getDatabase(context: Context): MyAppRoomDatabase {
-            // Si la instancia ya existe, la devuelve. Si no, la crea de forma sincronizada.
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    MyAppRoomDatabase::class.java,
-                    "manos_locales_db" // Usa un nombre fijo y simple
-                )
-                    .build()
-                INSTANCE = instance
-                instance
-            }
-        }
-    }
 }

@@ -5,332 +5,324 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.signUp.SignUpActivity"
-    android:padding="24dp">
+    android:padding="24dp"
+    tools:context=".ui.signUp.SignUpActivity">
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/container"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="800dp"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="50dp">-->
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/container"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="800dp"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        android:layout_marginTop="50dp">-->
 
-        <ImageButton
-            android:id="@+id/arrowbacksignup"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/arrow_back"
-            android:background="@android:color/transparent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:elevation="4dp"
-            />
+    <ImageButton
+        android:id="@+id/arrowbacksignup"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:src="@drawable/arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/signupbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/lineasignup"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/arrowbacksignup"
-            android:layout_marginTop="10dp"
-            />
+    <ImageView
+        android:id="@+id/signupbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/lineasignup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/arrowbacksignup" />
 
-        <TextView
-            android:id="@+id/registro_de_usuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratlight"
-            android:text="Registro de Usuario"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_marginTop="40dp"
-            app:layout_constraintTop_toBottomOf="@+id/signupbar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/registro_de_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserratlight"
+        android:text="Registro de Usuario"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupbar" />
 
-        <!-- campo usuario -->
-        <EditText
-            android:id="@+id/input_usuario"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounder_corner_input"
-            android:fontFamily="@font/montserratlight"
-            android:hint="Nombre de usuario"
-            android:inputType="text"
-            android:paddingHorizontal="15dp"
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/registro_de_usuario"
-            tools:layout_editor_absoluteX="33dp" />
+    <!-- campo usuario -->
+    <EditText
+        android:id="@+id/input_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounder_corner_input"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Nombre de usuario"
+        android:inputType="text"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/registro_de_usuario"
+        tools:layout_editor_absoluteX="33dp" />
 
-        <ImageView
-            android:id="@+id/status_usuario_check"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@android:color/transparent"
-            android:elevation="4dp"
-            android:src="@drawable/check"
-            app:layout_constraintTop_toBottomOf="@id/registro_de_usuario"
-            android:visibility="gone" />
+    <ImageView
+        android:id="@+id/status_usuario_check"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:src="@drawable/check"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/registro_de_usuario" />
 
-        <ImageView
-            android:id="@+id/status_usuario_error"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@android:color/transparent"
-            android:elevation="4dp"
-            android:src="@drawable/error"
-            app:layout_constraintTop_toBottomOf="@id/registro_de_usuario"
-            android:visibility="gone" />
+    <ImageView
+        android:id="@+id/status_usuario_error"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:src="@drawable/error"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/registro_de_usuario" />
 
-        <TextView
-            android:id="@+id/texto_error_usuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratlight"
-            android:text="Ingrese usuario correcto"
-            android:textColor="#FF0000"
-            android:textSize="9sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="2dp"
-            app:layout_constraintTop_toBottomOf="@id/input_usuario"
-            android:visibility="gone"
+    <TextView
+        android:id="@+id/texto_error_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/montserratlight"
+        android:text="Ingrese usuario correcto"
+        android:textColor="#FF0000"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_usuario"
 
-            />
+        />
 
 
-        <!-- campo mail -->
-        <EditText
-            android:id="@+id/input_mail"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:hint="Mail"
-            android:fontFamily="@font/montserratlight"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/rounder_corner_input"
-            app:layout_constraintTop_toBottomOf="@id/input_usuario"
-            android:textSize="12sp"
-            android:paddingHorizontal="15dp" />
+    <!-- campo mail -->
+    <EditText
+        android:id="@+id/input_mail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounder_corner_input"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Mail"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/input_usuario" />
 
-        <ImageView
-            android:id="@+id/status_mail_check"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="10dp"
-            android:background="@android:color/transparent"
-            android:elevation="4dp"
-            android:src="@drawable/check"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_usuario"
-            android:visibility="gone" />
+    <ImageView
+        android:id="@+id/status_mail_check"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:src="@drawable/check"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_usuario" />
 
-        <ImageView
-            android:id="@+id/status_mail_error"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="10dp"
-            android:background="@android:color/transparent"
-            android:elevation="4dp"
-            android:src="@drawable/error"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_usuario"
-            android:visibility="gone" />
+    <ImageView
+        android:id="@+id/status_mail_error"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:src="@drawable/error"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_usuario" />
 
-        <TextView
-            android:id="@+id/texto_error_mail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratlight"
-            android:text="Error, ingrese un correo válido o uno que ya no se encuentre registrado"
-            android:textColor="#FF0000"
-            android:textSize="9sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/input_mail"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="2dp"
-            android:visibility="gone" />
-
-
-        <!-- campo contraseña -->
-        <EditText
-            android:id="@+id/input_password"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:hint="Contraseña"
-            android:fontFamily="@font/montserratlight"
-            android:inputType="textPassword"
-            android:background="@drawable/rounder_corner_input"
-            app:layout_constraintTop_toBottomOf="@id/input_mail"
-            android:textSize="12sp"
-            android:paddingHorizontal="15dp"/>
-
-        <ImageView
-            android:id="@+id/status_password_check"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="10dp"
-            android:background="@android:color/transparent"
-            android:elevation="4dp"
-            android:src="@drawable/check"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_mail"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/status_password_error"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="10dp"
-            android:background="@android:color/transparent"
-            android:elevation="4dp"
-            android:src="@drawable/error"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_mail"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/texto_error_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratlight"
-            android:text="La contraseña debe contener al menos 8 digitos, números, caracteres y caracteres especiales"
-            android:textColor="#FF0000"
-            android:textSize="9sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/input_password"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="2dp"
-            app:layout_constraintBottom_toTopOf="@id/input_telefono"
-            android:visibility="gone"/>
-
-        <!-- campo telefono -->
-
-        <EditText
-            android:id="@+id/input_telefono"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:hint="Teléfono"
-            android:fontFamily="@font/montserratlight"
-            android:inputType="phone"
-            android:background="@drawable/rounder_corner_input"
-            app:layout_constraintTop_toBottomOf="@id/input_password"
-            android:textSize="12sp"
-            android:paddingHorizontal="15dp" />
-
-        <!-- campo provincia -->
-
-        <AutoCompleteTextView
-            android:id="@+id/autoProvincia"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Seleccioná tu provincia"
-            android:inputType="text"
-            android:textSize="12sp"
-            android:background="@drawable/rounder_corner_input"
-            android:fontFamily="@font/montserratlight"
-            android:paddingHorizontal="15dp"
-            app:layout_constraintTop_toBottomOf="@id/input_telefono"
-            android:layout_marginTop="30dp"
-            />
-
-        <ImageView
-            android:id="@+id/status_provincia_check"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="10dp"
-            android:background="@android:color/transparent"
-            android:elevation="4dp"
-            android:src="@drawable/check"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_telefono"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/status_provincia_error"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="10dp"
-            android:background="@android:color/transparent"
-            android:elevation="4dp"
-            android:src="@drawable/error"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_telefono"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/texto_error_provincia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratlight"
-            android:text="Seleccione una provincia correcta"
-            android:textColor="#FF0000"
-            android:textSize="9sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="2dp"
-            app:layout_constraintTop_toBottomOf="@id/autoProvincia"
-            android:visibility="gone"
-            />
+    <TextView
+        android:id="@+id/texto_error_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/montserratlight"
+        android:text="Error, ingrese un correo válido o uno que ya no se encuentre registrado"
+        android:textColor="#FF0000"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_mail" />
 
 
-        <!-- campo ciudad -->
+    <!-- campo contraseña -->
+    <EditText
+        android:id="@+id/input_password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounder_corner_input"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/input_mail" />
 
-        <EditText
-            android:id="@+id/input_ciudad"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:hint="Ciudad"
-            android:fontFamily="@font/montserratlight"
-            android:inputType="text"
-            android:background="@drawable/rounder_corner_input"
-            app:layout_constraintTop_toBottomOf="@id/autoProvincia"
-            android:textSize="12sp"
-            android:paddingHorizontal="15dp" />
+    <ImageView
+        android:id="@+id/status_password_check"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:src="@drawable/check"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_mail" />
+
+    <ImageView
+        android:id="@+id/status_password_error"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:src="@drawable/error"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_mail" />
+
+    <TextView
+        android:id="@+id/texto_error_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/montserratlight"
+        android:text="La contraseña debe contener al menos 8 digitos, números, caracteres y caracteres especiales"
+        android:textColor="#FF0000"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/input_telefono"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_password" />
+
+    <!-- campo telefono -->
+
+    <EditText
+        android:id="@+id/input_telefono"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounder_corner_input"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Teléfono"
+        android:inputType="phone"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/input_password" />
+
+    <!-- campo provincia -->
+
+    <AutoCompleteTextView
+        android:id="@+id/autoProvincia"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounder_corner_input"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Seleccioná tu provincia"
+        android:inputType="text"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/input_telefono" />
+
+    <ImageView
+        android:id="@+id/status_provincia_check"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:src="@drawable/check"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_telefono" />
+
+    <ImageView
+        android:id="@+id/status_provincia_error"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:src="@drawable/error"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_telefono" />
+
+    <TextView
+        android:id="@+id/texto_error_provincia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/montserratlight"
+        android:text="Seleccione una provincia correcta"
+        android:textColor="#FF0000"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/autoProvincia" />
 
 
-        <!-- Registrarme -->
+    <!-- campo ciudad -->
 
-        <Button
-            android:id="@+id/buttonRegistrarme"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Registrarme"
-            android:background="@drawable/background_gradient_button"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:fontFamily="@font/montserratmedium"
-            android:textAllCaps="false"
-            android:layout_marginBottom="40dp"
-            />
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <EditText
+        android:id="@+id/input_ciudad"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounder_corner_input"
+        android:fontFamily="@font/montserratlight"
+        android:hint="Ciudad"
+        android:inputType="text"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/autoProvincia" />
 
 
+    <!-- Registrarme -->
 
+    <Button
+        android:id="@+id/buttonRegistrarme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/background_gradient_button"
+        android:fontFamily="@font/montserratmedium"
+        android:text="Registrarme"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

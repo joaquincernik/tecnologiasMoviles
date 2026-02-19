@@ -46,6 +46,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.SubcomposeAsyncImage
 import com.undef.manosLocalesCernikGaribaldi.R
@@ -62,9 +63,9 @@ import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratRegular
 @Composable
 fun EmprendimientoDetailScreen(
     navController: NavHostController,
-    viewModel: EmprendimientoDetailViewModel = EmprendimientoDetailViewModel(),
     id: Int
 ) {
+    val viewModel: EmprendimientoDetailViewModel = hiltViewModel()
     var selectedIndex by remember {
         mutableIntStateOf(0)
     }

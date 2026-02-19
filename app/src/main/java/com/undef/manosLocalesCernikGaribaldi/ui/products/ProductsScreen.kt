@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.undef.manosLocalesCernikGaribaldi.R
@@ -33,7 +34,7 @@ import com.undef.manosLocalesCernikGaribaldi.utils.components.CardProducto
 import com.undef.manosLocalesCernikGaribaldi.utils.components.TopBar
 
 @Composable
-fun ProductsScreen(navController: NavHostController, viewModel: ProductViewModel = viewModel()) {
+fun ProductsScreen(navController: NavHostController, viewModel: ProductViewModel = hiltViewModel()) {
 
     // Convertimos el LiveData del ViewModel en un Estado de Compose
     val listaProductos by viewModel.listaProductos.observeAsState(initial = emptyList())

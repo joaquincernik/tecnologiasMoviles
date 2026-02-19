@@ -12,7 +12,9 @@ import com.undef.manosLocalesCernikGaribaldi.ui.forgotPassword.ForgotPasswordAct
 import com.undef.manosLocalesCernikGaribaldi.ui.main.PantallaPrincipalActivity
 import com.undef.manosLocalesCernikGaribaldi.ui.signUp.SignUpActivity
 import com.undef.manosLocalesCernikGaribaldi.databinding.ActivityLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityLoginBinding
@@ -28,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //chequeo de sesion
-        if (MyApplication.preferences.isLoggedIn()) {
+        if (viewModel.checkSession()) {
             startActivity(Intent(this, PantallaPrincipalActivity::class.java))
             finish() // Cerramos el login para que no pueda volver atrás
             return // Importante salir del onCreate

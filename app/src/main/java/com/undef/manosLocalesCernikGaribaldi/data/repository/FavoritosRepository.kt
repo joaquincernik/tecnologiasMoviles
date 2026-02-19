@@ -3,8 +3,9 @@ package com.undef.manosLocalesCernikGaribaldi.data.repository
 import androidx.lifecycle.LiveData
 import com.undef.manosLocalesCernikGaribaldi.data.local.dao.FavoritosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.FavoritosEntity
+import javax.inject.Inject
 
-class FavoritosRepository(private val favoritosDao: FavoritosDao) {
+class FavoritosRepository @Inject constructor(private val favoritosDao: FavoritosDao) {
 
 
     // Función para obtener el estado de favorito de forma reactiva (para la UI)

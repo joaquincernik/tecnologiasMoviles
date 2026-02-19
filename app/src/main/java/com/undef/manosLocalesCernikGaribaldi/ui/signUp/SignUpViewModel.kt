@@ -10,15 +10,17 @@ import com.undef.manosLocalesCernikGaribaldi.R
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.repository.UsuariosRepository
 import com.undef.manosLocalesCernikGaribaldi.ui.login.LoginUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpViewModel : ViewModel() {
+@HiltViewModel
+class SignUpViewModel @Inject constructor(
+    val repository: UsuariosRepository
+) : ViewModel() {
     private val _uiState = MutableLiveData<SignUpUiState>(SignUpUiState()) //_ porque es privado
     val uiState: LiveData<SignUpUiState> get() = _uiState //cuando acceda el valor de uistate obtengo el de _uistate
-    val userDao = MyApplication.myAppDatabase.usuariosDao()
-    val repository = UsuariosRepository(userDao)
-
     fun onMailChanged(email: String) {
         val isValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
         _uiState.value = _uiState.value?.copy(isMailValid = isValid)

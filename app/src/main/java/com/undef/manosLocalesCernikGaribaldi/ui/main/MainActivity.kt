@@ -9,8 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.core.app.ActivityCompat
 import androidx.navigation.compose.rememberNavController
 import com.undef.manosLocalesCernikGaribaldi.ui.navigation.NavigationCenter
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class PantallaPrincipalActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +27,6 @@ class PantallaPrincipalActivity : ComponentActivity() {
         }
         setContent {
             //esto va a manejar las vistas del main
-
            MyApp()
         }
     }

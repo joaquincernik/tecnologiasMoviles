@@ -44,6 +44,7 @@ import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -68,7 +69,7 @@ import com.undef.manosLocalesCernikGaribaldi.utils.theme.FontMontserratSemiBold
 fun ProductDetailScreen(
     navController: NavHostController,
     productId: Int,
-    viewModel: ProductDetailViewModel = viewModel()
+    viewModel: ProductDetailViewModel = hiltViewModel()
 ) {
     //cuando cambie product id se ejecuta este bloque
     LaunchedEffect(productId) {
