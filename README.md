@@ -34,3 +34,8 @@ El proyecto está basado en las consignas en "Enunciado Práctico Integrador 202
 
 1. Clona este repositorio:
    ```bash https://github.com/joaquincernik/tecnologiasMoviles.git
+
+2. Presentacion de la app
+3. https://github.com/joaquincernik/tecnologiasMoviles/presentation.mp4
+
+   
