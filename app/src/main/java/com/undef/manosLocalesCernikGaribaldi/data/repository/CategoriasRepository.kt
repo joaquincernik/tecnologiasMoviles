@@ -18,6 +18,8 @@ class CategoriasRepository @Inject constructor(
 
     suspend fun refreshCategorias() {
         try {
+            Log.e("REPO", "refresh cat")
+
             val response = this.fetchCategorias()
             val apiData = response.map { it.toEntity() }
             val existingEntities = dao.getAllCategoriasOnce()

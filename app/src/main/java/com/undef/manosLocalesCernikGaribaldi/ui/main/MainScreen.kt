@@ -40,13 +40,13 @@ import com.undef.manosLocalesCernikGaribaldi.utils.components.TopBar
 
 // para que entiendas lo que hice, fijate este video minuto: 8:40
 //https://youtu.be/ytCWjSN0iTI
-
+/*
 @Composable
 @Preview
 fun Prev() {
     HomeScreen(rememberNavController())
 }
-
+*/
 @Composable
 fun HomeScreen(navController: NavHostController, viewModel: MainViewModel = hiltViewModel()) {
 

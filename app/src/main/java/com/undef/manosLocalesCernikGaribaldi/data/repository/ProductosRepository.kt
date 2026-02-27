@@ -84,7 +84,8 @@ class ProductosRepository @Inject constructor(
 
     suspend fun fetchProductos(): List<ProductoDTO> {
         //antes de traer y guardar un producto la categoria tiene que estar creada
-        categoriasRepository.fetchCategorias()
+        Log.e("REPO", "fetchProductos")
+        categoriasRepository.refreshCategorias()
         return api.getProductos()
     }
 
