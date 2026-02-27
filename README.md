@@ -23,6 +23,7 @@ El objetivo es desarrollar una aplicación móvil utilizando **Kotlin** para la 
 - **IDE**: Android Studio
 - **Arquitectura**: MVVM (Model-View-ViewModel)
 - **Librerías**: Jetpack
+[compressed.webm](https://github.com/user-attachments/assets/df961c99-5b56-4901-9c73-7dba021ea169)
 
 ---
 
@@ -35,7 +36,6 @@ El proyecto está basado en las consignas en "Enunciado Práctico Integrador 202
 1. Clona este repositorio:
    ```bash https://github.com/joaquincernik/tecnologiasMoviles.git
 
-2. Presentacion de la app
-https://github.com/joaquincernik/tecnologiasMoviles/blob/main/compressed.webm
+
 
    
