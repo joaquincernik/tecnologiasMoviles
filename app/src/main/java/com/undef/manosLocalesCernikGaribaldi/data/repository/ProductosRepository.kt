@@ -17,6 +17,7 @@ class ProductosRepository @Inject constructor(
     private val dao: ProductosDao,
     private val favoritosRepository: FavoritosRepository,
     private val usuariosRepository: UsuariosRepository,
+    private val categoriasRepository: CategoriasRepository,
     private val notificationHelper: NotificationHelper
 ) {
     val allProductos: LiveData<List<ProductoConEmprendimiento>> =
@@ -82,6 +83,8 @@ class ProductosRepository @Inject constructor(
     }
 
     suspend fun fetchProductos(): List<ProductoDTO> {
+        //antes de traer y guardar un producto la categoria tiene que estar creada
+        categoriasRepository.fetchCategorias()
         return api.getProductos()
     }
 

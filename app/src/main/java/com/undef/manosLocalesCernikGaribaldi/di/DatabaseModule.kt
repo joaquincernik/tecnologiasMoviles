@@ -44,5 +44,8 @@ object DatabaseModule {
     @Provides
     fun provideFavoritosDao(db: MyAppRoomDatabase) = db.favoritosDao()
 
+    @Provides
+    fun provideCategoriasDao(db: MyAppRoomDatabase) = db.categoriasDao()
+
 }
 

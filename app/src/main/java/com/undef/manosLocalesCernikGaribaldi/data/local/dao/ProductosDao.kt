@@ -8,8 +8,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductCategoryCrossRef
-import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConCategorias
 import com.undef.manosLocalesCernikGaribaldi.data.local.relations.ProductoConEmprendimiento
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 
@@ -55,12 +53,6 @@ interface ProductosDao {
     @Query("SELECT * FROM productos WHERE Id = :id")
     suspend fun getProductoConEmprendimiento(id: Int): ProductoConEmprendimiento
 
-    @Transaction
-    @Query("SELECT * FROM productos WHERE Id = :id")
-    suspend fun getProductoConCategorias(id: Int): ProductoConCategorias?
-
-    @Insert(onConflict = OnConflictStrategy.Companion.IGNORE)
-    suspend fun insertProductCategoryCrossRef(crossRef: ProductCategoryCrossRef)
 
     @Query("SELECT * FROM productos")
     suspend fun getAllProductsSync(): List<ProductosEntity>

@@ -6,7 +6,6 @@ import androidx.room.Relation
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.CategoriasEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.FavoritosEntity
-import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductCategoryCrossRef
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 
@@ -34,21 +33,6 @@ data class ProductoConEmprendimiento(
     val emprendimiento: EmprendimientosEntity
 )
 
-// 2. Producto con sus Categorías (Relación N:M)
-data class ProductoConCategorias(
-    @Embedded val producto: ProductosEntity,
-    @Relation(
-        parentColumn = "Id",
-        entityColumn = "id",
-        associateBy = Junction(
-            value = ProductCategoryCrossRef::class,
-            parentColumn = "productId",
-            entityColumn = "catId"
-        )
-    )
-    val categorias: List<CategoriasEntity>
-)
-
 // 3. Emprendimiento con todos sus Productos (Relación 1:N)
 data class EmprendimientoConProductos(
     @Embedded val emprendimiento: EmprendimientosEntity,
@@ -59,6 +43,15 @@ data class EmprendimientoConProductos(
     val productos: List<ProductosEntity>
 )
 
+data class CategoriaConProductos(
+    @Embedded val categoria: CategoriasEntity,
+
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "categoryId"
+    )
+    val productos: List<ProductosEntity>
+)
 // 4. Usuario con sus Productos Favoritos (Relación N:M)
 /*data class UsuarioConFavoritos(
     @Embedded val usuario: UsuariosEntity,

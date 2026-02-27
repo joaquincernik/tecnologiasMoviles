@@ -13,7 +13,6 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.dao.UsuariosDao
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.CategoriasEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.EmprendimientosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.FavoritosEntity
-import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductCategoryCrossRef
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.ProductosEntity
 import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
 
@@ -24,7 +23,6 @@ import com.undef.manosLocalesCernikGaribaldi.data.local.entities.UsuariosEntity
         CategoriasEntity::class,
         EmprendimientosEntity::class,
         FavoritosEntity::class,
-        ProductCategoryCrossRef::class
     ],
     version = 4
 )

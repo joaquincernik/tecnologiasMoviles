@@ -11,9 +11,9 @@ import com.undef.manosLocalesCernikGaribaldi.data.remote.dto.toEntity
 import javax.inject.Inject
 
 class EmprendimientosRepository @Inject constructor(
-private val api: ApiService,
-private val dao: EmprendimientosDao
-){
+    private val api: ApiService,
+    private val dao: EmprendimientosDao
+) {
     //  LA FUENTE DE VERDAD:
     // Exponemos el LiveData del DAO.
     // Cualquier cambio en la DB se reflejará aquí automáticamente.

@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -87,7 +89,17 @@ fun ContentProducts(
                 unfocusedBorderColor = Color.Transparent
             )
         )
+        Button(
 
+            onClick = { navController.navigate("categorias") },
+                    colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF4CAF50), // Verde moderno
+            contentColor = Color.White
+        )
+
+        ) {
+            Text("Filtrar por Categorías")
+        }
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()

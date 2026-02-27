@@ -9,7 +9,8 @@ data class ProductoDTO(
     @SerializedName("name") val name: String,
     @SerializedName("description") val description: String,
     @SerializedName("emprendimientoId") val emprendimientoId: Int,
-    @SerializedName("photoUrl") val photoUrl: String
+    @SerializedName("photoUrl") val photoUrl: String,
+    @SerializedName("categoryId") val categoryId: Int,
 
 )
 //me llega como DTO, tengo que transformarlo en entity para insertarlo
@@ -21,5 +22,7 @@ fun ProductoDTO.toEntity(): ProductosEntity {
         price = price,
         emprendimientoId = emprendimientoId,
         photoUrl = photoUrl,
+        categoryId = categoryId
+
     )
 }

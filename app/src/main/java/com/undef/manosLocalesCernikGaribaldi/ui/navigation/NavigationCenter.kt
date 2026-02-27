@@ -6,6 +6,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.undef.manosLocalesCernikGaribaldi.ui.categorias.CategoriaDetailScreen
+import com.undef.manosLocalesCernikGaribaldi.ui.categorias.CategoriasScreen
 import com.undef.manosLocalesCernikGaribaldi.ui.emprendimientos.EmprendimientoDetailScreen
 import com.undef.manosLocalesCernikGaribaldi.ui.main.HomeScreen
 import com.undef.manosLocalesCernikGaribaldi.ui.products.ProductDetailScreen
@@ -23,6 +25,7 @@ fun NavigationCenter(navController: NavHostController) {
         composable("profile") { ProfileScreen(navController) }
         composable("editarPreferencias") { EditarPreferenciasScreen(navController) }
         composable("editarPerfilScreen") { EditarPerfilScreen(navController) }
+        composable("categorias"){ CategoriasScreen(navController) }
 
         //detail de emprendimiento
         composable(
@@ -54,6 +57,15 @@ fun NavigationCenter(navController: NavHostController) {
                 productId = productId,
                 navController = navController
             )
+        }
+
+        //detail de categoria
+        composable(
+            route = "categoriaDetail/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getInt("id") ?: 0
+            CategoriaDetailScreen(categoriaId = id, navController = navController)
         }
 
     }

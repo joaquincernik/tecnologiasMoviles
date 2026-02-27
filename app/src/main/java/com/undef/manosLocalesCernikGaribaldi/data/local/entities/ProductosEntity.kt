@@ -12,6 +12,12 @@ import androidx.room.PrimaryKey
             parentColumns = ["Id"],
             childColumns = ["emprendimientoId"],
             onDelete = ForeignKey.Companion.CASCADE
+        ),
+        ForeignKey(
+            entity = CategoriasEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["categoryId"],
+            onDelete = ForeignKey.CASCADE
         )
     ]
 )
@@ -22,4 +28,7 @@ data class ProductosEntity(
     val description: String,
     val emprendimientoId: Int,
     val photoUrl: String,
+
+    //fk de category
+    val categoryId: Int
 )
